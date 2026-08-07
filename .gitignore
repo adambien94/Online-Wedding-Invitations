@@ -1,0 +1,35 @@
+node_modules/
+.next/
+out/
+dist/
+.vercel/
+.vercel_build_output/
+.cache/
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# macOS
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+public/build/
+
+# Misc
+/.parcel-cache
+.turbo/
