@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils";
 
 export default function NavBar() {
   return (
-    <header className="w-full bg-white/90 backdrop-blur-sm border-b">
+    <header className="w-full bg-white  backdrop-blur-sm border-b">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-serif text-rose-900">
+            <Link href="/" className="text-3xl font-serif text-rose-900">
               Nasz Dzień
             </Link>
           </div>
@@ -37,7 +37,6 @@ export default function NavBar() {
                 buttonVariants({
                   variant: "default",
                   size: "lg",
-                  className: "bg-rose-900 text-white",
                 }),
               )}
             >

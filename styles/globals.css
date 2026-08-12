@@ -161,7 +161,7 @@ body {
 
 /* Override Tailwind's `font-serif` utility to use Cormorant Garamond everywhere */
 .font-serif {
-  /* font-family:
+  font-family:
     "Cormorant Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
-  font-weight: 600; */
+  font-weight: 600;
 }
