@@ -31,7 +31,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-12">
+    <section id="faq" className="py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:flex">
         <div className="lg:w-1/2 flex gap-4">
           <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
