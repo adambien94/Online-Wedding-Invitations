@@ -18,10 +18,17 @@ export default function Hero() {
               menu i więcej.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button className="bg-rose-900 text-white px-6" size="lg">
+              <Button
+                className="bg-rose-900 text-white px-6 w-full lg:w-auto"
+                size="lg"
+              >
                 Stwórz stronę wesela
               </Button>
-              <Button variant="outline" size="lg" className="px-6">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-6 w-full lg:w-auto"
+              >
                 Zobacz możliwości
               </Button>
             </div>

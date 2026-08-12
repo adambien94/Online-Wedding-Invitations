@@ -51,7 +51,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-16 bg-neutral-900 text-white">
+    <section id="pricing" className="py-16 border-t border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-serif font-base">
           Wybierzcie pojemność Waszej galerii.
@@ -68,6 +68,9 @@ export default function Pricing() {
                 <CardDescription className="text-3xl text-rose-900 font-bold">
                   {p.price}
                 </CardDescription>
+                <p className="text-muted-foreground text-xs">
+                  Do 200 zdjęć lub filmów
+                </p>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground ">

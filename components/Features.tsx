@@ -4,24 +4,29 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { Camera, CalendarDays, MapPin, SlidersHorizontal } from "lucide-react";
 
 export default function Features() {
   const items = [
     {
       title: "Galeria od gości",
       desc: "Zdjęcia i filmy przesyłane prosto z telefonu.",
+      icon: Camera,
     },
     {
       title: "Plan dnia i menu",
       desc: "Harmonogram, karta dań i karta drinków.",
+      icon: CalendarDays,
     },
     {
       title: "Dojazd jednym kliknięciem",
       desc: "Adres kościoła i sala z nawigacją.",
+      icon: MapPin,
     },
     {
       title: "Prosty panel pary",
       desc: "Zarządzanie treścią i zdjęciami bez pomocy technicznej.",
+      icon: SlidersHorizontal,
     },
   ];
 
@@ -36,14 +41,22 @@ export default function Features() {
         </p>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {items.map((it) => (
-            <Card key={it.title}>
-              <CardHeader>
-                <CardTitle className="text-rose-900 ">{it.title}</CardTitle>
-                <CardDescription>{it.desc}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
+          {items.map((it) => {
+            const Icon = it.icon;
+            return (
+              <Card key={it.title}>
+                <CardHeader className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <CardTitle>{it.title}</CardTitle>
+                    <CardDescription>{it.desc}</CardDescription>
+                  </div>
+                </CardHeader>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,3 +1,9 @@
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { UserPlus, Palette, Globe2, QrCode } from "lucide-react";
 
 export default function Steps() {
@@ -37,13 +43,17 @@ export default function Steps() {
           {steps.map((s) => {
             const Icon = s.icon;
             return (
-              <div key={s.title} className="p-4 text-center">
-                <div className="h-12 w-12 mx-auto rounded-full bg-rose-100 text-rose-900 flex items-center justify-center">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h4 className="mt-3 font-medium">{s.title}</h4>
-                <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
-              </div>
+              <Card key={s.title}>
+                <CardHeader className="flex flex-col items-center gap-4 text-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <CardTitle>{s.title}</CardTitle>
+                    <CardDescription>{s.desc}</CardDescription>
+                  </div>
+                </CardHeader>
+              </Card>
             );
           })}
         </div>
