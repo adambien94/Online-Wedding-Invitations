@@ -25,7 +25,7 @@ export default function Steps() {
   ];
 
   return (
-    <section className="bg-gray-50 py-12">
+    <section className="bg-white border-t border-gray-100 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-serif font-base text-gray-900">
           Wy przygotowujecie stronę. Goście wypełniają ją wspomnieniami.

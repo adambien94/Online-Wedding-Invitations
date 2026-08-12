@@ -35,7 +35,7 @@ export default function Features() {
           Wy zachowujecie wszystkie wspomnienia.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {items.map((it) => (
             <Card key={it.title}>
               <CardHeader>

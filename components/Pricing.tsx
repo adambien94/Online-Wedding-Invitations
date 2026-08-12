@@ -7,6 +7,8 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import { Separator } from "@base-ui/react";
+import { Check } from "lucide-react";
 
 export default function Pricing() {
   const plans = [
@@ -58,7 +60,7 @@ export default function Pricing() {
           Każdy wariant obejmuje jedną stronę wydarzenia i wszystkie funkcje.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           {plans.map((p) => (
             <Card key={p.title}>
               <CardHeader>
@@ -68,12 +70,15 @@ export default function Pricing() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <ul className="space-y-2 text-sm text-muted-foreground ">
                   {p.features.map((f) => (
-                    <li key={f}>• {f}</li>
+                    <li key={f} className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-rose-900" /> {f}
+                    </li>
                   ))}
                 </ul>
               </CardContent>
+              <Separator />
               <CardFooter>
                 <Button className="w-full" variant="outline">
                   Zaczynamy
