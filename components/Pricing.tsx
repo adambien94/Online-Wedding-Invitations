@@ -13,7 +13,14 @@ export default function Pricing() {
     {
       title: "Klasyczny",
       price: "99,50 zł",
-      features: ["Do 200 zdjęć lub filmów", "Kod QR", "Podstawowe wsparcie"],
+      features: [
+        "Do 200 zdjęć lub filmów",
+        "Kod QR",
+        "Podstawowe wsparcie",
+        "Do 200 zdjęć lub filmów",
+        "Kod QR",
+        "Podstawowe wsparcie",
+      ],
     },
     {
       title: "Rozszerzony",
@@ -22,12 +29,18 @@ export default function Pricing() {
         "Do 500 zdjęć",
         "Więcej opcji personalizacji",
         "Pełne wsparcie i eksport",
+        "Do 200 zdjęć lub filmów",
+        "Kod QR",
+        "Podstawowe wsparcie",
       ],
     },
     {
       title: "Maksymalny",
       price: "199,50 zł",
       features: [
+        "Do 200 zdjęć lub filmów",
+        "Kod QR",
+        "Podstawowe wsparcie",
         "Do 1000 zdjęć",
         "Pełne wsparcie i eksport",
         "Cuda w personalizacji",
@@ -38,7 +51,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-16 bg-neutral-900 text-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="text-2xl font-serif font-base">
           Wybierzcie pojemność Waszej galerii.
         </h2>
         <p className="mt-2 text-muted-foreground">
@@ -62,7 +75,9 @@ export default function Pricing() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button className="w-full">Zaczynamy</Button>
+                <Button className="w-full" variant="outline">
+                  Zaczynamy
+                </Button>
               </CardFooter>
             </Card>
           ))}

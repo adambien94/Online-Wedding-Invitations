@@ -13,14 +13,20 @@ export default function NavBar() {
           <nav className="hidden md:flex space-x-6 text-sm items-center">
             <Link
               href="#features"
-              className="text-gray-700 hover:text-rose-600"
+              className="text-muted-foreground hover:text-rose-600"
             >
               Możliwości
             </Link>
-            <Link href="#pricing" className="text-gray-700 hover:text-rose-600">
+            <Link
+              href="#pricing"
+              className="text-muted-foreground hover:text-rose-600"
+            >
               Cennik
             </Link>
-            <Link href="#faq" className="text-gray-700 hover:text-rose-600">
+            <Link
+              href="#faq"
+              className="text-muted-foreground hover:text-rose-600"
+            >
               FAQ
             </Link>
             <Link

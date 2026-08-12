@@ -1,3 +1,10 @@
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion'
+
 export default function FAQ() {
   const items = [
     {
@@ -17,14 +24,16 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 className="text-xl font-semibold">Zanim zaczniecie</h3>
-        <div className="mt-6 space-y-4">
-          {items.map((it) => (
-            <details key={it.q} className="p-4 border rounded-md bg-white">
-              <summary className="font-medium">{it.q}</summary>
-              <div className="mt-2 text-sm text-muted-foreground">{it.a}</div>
-            </details>
-          ))}
+        <h3 className="text-2xl font-serif font-base">Zanim zaczniecie</h3>
+        <div className="mt-6">
+          <Accordion>
+            {items.map((it) => (
+              <AccordionItem key={it.q} value={it.q}>
+                <AccordionTrigger>{it.q}</AccordionTrigger>
+                <AccordionContent>{it.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>
