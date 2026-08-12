@@ -31,12 +31,12 @@ export default function Steps() {
   ];
 
   return (
-    <section className="bg-white border-t border-gray-100 py-12">
+    <section className="bg-white border-t border-gray-100 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-serif font-base text-gray-900">
+        <h2 className="text-3xl text-center font-serif font-base text-gray-900">
           Wy przygotowujecie stronę. Goście wypełniają ją wspomnieniami.
         </h2>
-        <p className="mt-2 text-muted-foreground">
+        <p className="mt-2 text-center text-muted-foreground">
           Wy zachowujecie wszystkie wspomnienia.
         </p>
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-4 gap-4">

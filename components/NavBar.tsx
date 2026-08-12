@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 export default function NavBar() {
   return (
@@ -10,28 +12,34 @@ export default function NavBar() {
               Nasz Dzień
             </Link>
           </div>
-          <nav className="hidden md:flex space-x-6 text-sm items-center">
+          <nav className="hidden md:flex space-x-3 text-sm items-center">
             <Link
               href="#features"
-              className="text-muted-foreground hover:text-rose-600"
+              className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
             >
               Możliwości
             </Link>
             <Link
               href="#pricing"
-              className="text-muted-foreground hover:text-rose-600"
+              className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
             >
               Cennik
             </Link>
             <Link
               href="#faq"
-              className="text-muted-foreground hover:text-rose-600"
+              className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
             >
               FAQ
             </Link>
             <Link
               href="/login"
-              className="px-4 py-2 rounded-md bg-rose-900 text-white text-sm"
+              className={cn(
+                buttonVariants({
+                  variant: "default",
+                  size: "lg",
+                  className: "bg-rose-900 text-white",
+                }),
+              )}
             >
               Zaloguj
             </Link>

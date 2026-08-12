@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="bg-[url('https://naszdzien.app/nasz-dzien-hero.webp')] bg-cover bg-left lg:bg-center">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
+          <div className="lg:py-16">
             <p className="text-xs text-rose-900 font-medium">
               — CYFROWA OPIEKA WASZEGO WESELA
             </p>
@@ -33,9 +33,7 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          <div className="lg:ml-auto">
-            <InviteForm />
-          </div>
+          <div className="lg:ml-auto">{/* <InviteForm /> */}</div>
         </div>
       </div>
     </section>
