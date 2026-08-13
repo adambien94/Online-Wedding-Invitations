@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +13,35 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import NavBar from "@/components/NavBar";
+import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return;
+    }
+
+    router.push("/dashboard");
+  };
+
   return (
     <>
       <Head>
@@ -27,7 +56,7 @@ export default function LoginPage() {
           <Card className="w-full max-w-md shadow-xl">
             <CardContent className="space-y-6 p-8">
               <div className="space-y-2">
-                <CardTitle className="text-4xl font-bold font-serif text-rose-900">
+                <CardTitle className="text-4xl font-bold font-serif">
                   Zaczynamy
                 </CardTitle>
                 <CardDescription className="text-sm">
@@ -47,65 +76,46 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <form className="space-y-5">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Imię lub nazwa konta</Label>
-                  <Input id="name" placeholder="Ania i Piotr" />
-                </div>
+              <form className="space-y-5" onSubmit={handleLogin}>
+                {error && (
+                  <div className="rounded-md bg-red-50 p-3 text-sm text-red-800">
+                    {error}
+                  </div>
+                )}
 
                 <div className="space-y-2">
                   <Label htmlFor="email">Adres e-mail</Label>
-                  <Input id="email" placeholder="kontakt@naszdzien.app" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="kontakt@naszdzien.app"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="password">Hasło</Label>
-                  <Input id="password" placeholder="Minimum 10 znaków" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Wpisz hasło"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="site">Adres strony</Label>
-                  <div className="flex overflow-hidden rounded-3xl border bg-white">
-                    <Input
-                      id="site"
-                      placeholder="ania-piotr"
-                      className="border-0 bg-transparent focus-visible:ring-0"
-                    />
-                    <span className="flex items-center px-3 text-sm text-muted-foreground bg-gray-100">
-                      .naszdzien.app
-                    </span>
-                  </div>
-                </div>
-
-                <label className="flex gap-3 leading-relaxed text-xs text-muted-foreground">
-                  <input type="checkbox" />
-                  <span>
-                    Akceptuję{" "}
-                    <a
-                      href="#"
-                      className="font-medium underline underline-offset-2"
-                    >
-                      regulamin
-                    </a>{" "}
-                    oraz{" "}
-                    <a
-                      href="#"
-                      className="font-medium underline underline-offset-2"
-                    >
-                      politykę prywatności
-                    </a>{" "}
-                    i potwierdzam zapoznanie się z zasadami przetwarzania
-                    danych.
-                  </span>
-                </label>
-
-                <Button className="w-full ">Utwórz konto</Button>
+                <Button className="w-full" disabled={loading} type="submit">
+                  {loading ? "Logowanie..." : "Zaloguj się"}
+                </Button>
               </form>
 
               <p className="text-center text-sm text-muted-foreground">
-                Masz już konto?{" "}
-                <Link href="/login" className="underline">
-                  Zaloguj się
+                Nie masz konta?{" "}
+                <Link href="/register" className="underline">
+                  Zarejestruj się
                 </Link>
               </p>
             </CardContent>

@@ -60,8 +60,8 @@ export default function TemplatesPreview() {
               ))}
             </CarouselContent>
 
-            <CarouselPrevious className="hidden lg:block" />
-            <CarouselNext className="hidden lg:block" />
+            <CarouselPrevious className="max-lg:hidden" />
+            <CarouselNext className="max-lg:hidden" />
           </Carousel>
         </div>
       </div>

@@ -83,7 +83,7 @@ export default function Pricing() {
               </CardContent>
               <Separator />
               <CardFooter>
-                <Button className="w-full" variant="">
+                <Button className="w-full" size="lg">
                   Zaczynamy
                 </Button>
               </CardFooter>
