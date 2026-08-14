@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,19 +15,79 @@ import { Separator } from "@/components/ui/separator";
 import NavBar from "@/components/NavBar";
 import { createClient } from "@/lib/supabase/client";
 
+const validateSlug = (s: string) => {
+  if (!s) return "Adres nie może być pusty";
+  if (s.length < 3 || s.length > 50) return "Adres musi mieć 3–50 znaków";
+  if (!/^[a-z0-9-]+$/.test(s)) return "Adres może zawierać tylko: a-z, 0-9 i myślnik";
+  if (/--/.test(s)) return "Adres nie może zawierać podwójnych myślników";
+  if (/^-|-$/.test(s)) return "Adres nie może zaczynać się ani kończyć myślnikiem";
+  return null;
+};
+
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [slug, setSlug] = useState("");
+  const [slugError, setSlugError] = useState<string | null>(null);
+  const [slugStatus, setSlugStatus] = useState<"idle" | "checking" | "available" | "taken" | "error">("idle");
+  const [slugMessage, setSlugMessage] = useState("");
   const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
   const supabase = createClient();
 
+  useEffect(() => {
+    const normalized = slug.trim();
+
+    if (!normalized) {
+      setSlugStatus("idle");
+      setSlugMessage("");
+      return;
+    }
+
+    const validationError = validateSlug(normalized);
+    if (validationError) {
+      setSlugStatus("error");
+      setSlugMessage(validationError);
+      return;
+    }
+
+    const timeout = setTimeout(async () => {
+      setSlugStatus("checking");
+      setSlugMessage("Sprawdzamy dostępność...");
+
+      try {
+        const res = await fetch("/api/slug-check", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ slug: normalized }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.available) {
+          setSlugStatus("available");
+          setSlugMessage("Adres jest dostępny.");
+          return;
+        }
+
+        setSlugStatus("taken");
+        setSlugMessage(data?.message || "Ten adres jest już zajęty.");
+      } catch (err) {
+        setSlugStatus("error");
+        setSlugMessage("Nie udało się sprawdzić dostępności adresu.");
+      }
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [slug]);
+
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+    setSlugError(null);
 
     if (password.length < 10) {
       setError("Hasło musi mieć minimum 10 znaków");
@@ -35,18 +95,87 @@ export default function RegisterPage() {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
+    const slugValue = slug.trim();
+    const slugValidation = validateSlug(slugValue);
+    if (slugValidation) {
+      setSlugError(slugValidation);
       setLoading(false);
       return;
     }
 
-    // Don't redirect immediately — inform user to confirm via email
+    try {
+      const res = await fetch("/api/slug-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug: slugValue }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.available === false) {
+        setSlugError(data?.message || "Ten adres jest już zajęty");
+        setLoading(false);
+        return;
+      }
+    } catch (err) {
+      setSlugError("Błąd podczas sprawdzania dostępności adresu");
+      setLoading(false);
+      return;
+    }
+
+    let reservationId: string | null = null;
+    try {
+      const r = await fetch("/api/reserve-slug", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug: slugValue }),
+      });
+      const jr = await r.json();
+      if (!r.ok || !jr.success) {
+        setSlugError(jr?.message || "Ten adres jest już zajęty");
+        setLoading(false);
+        return;
+      }
+      reservationId = jr.id;
+    } catch (err) {
+      setSlugError("Błąd rezerwacji adresu");
+      setLoading(false);
+      return;
+    }
+
+    const { data: signData, error: signError } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (signError) {
+      if (reservationId) {
+        try {
+          await fetch("/api/release-reservation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reservationId }),
+          });
+        } catch (e) {
+          console.warn("release failed", e);
+        }
+      }
+      setError(signError.message);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const userId = signData?.user?.id;
+      if (reservationId && userId) {
+        await fetch("/api/claim-reservation", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reservationId, userId }),
+        });
+      }
+    } catch (e) {
+      console.warn("claim reservation failed", e);
+    }
+
     setEmailSent(true);
     setLoading(false);
   };
@@ -91,6 +220,45 @@ export default function RegisterPage() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="slug">Adres Twojego zaproszenia</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="slug"
+                        type="text"
+                        placeholder="ania-piotr"
+                        value={slug}
+                        onChange={(e) => setSlug(e.target.value.toLowerCase())}
+                        required
+                      />
+                      <span className="inline-flex items-center px-3 text-sm text-muted-foreground">
+                        .twojadomena.pl
+                      </span>
+                    </div>
+
+                    {slugStatus === "checking" || slugStatus === "available" || slugStatus === "taken" || slugStatus === "error" ? (
+                      <p
+                        className={
+                          slugStatus === "available"
+                            ? "text-sm text-emerald-600"
+                            : slugStatus === "taken" || slugStatus === "error"
+                              ? "text-sm text-red-700"
+                              : "text-sm text-muted-foreground"
+                        }
+                      >
+                        {slugMessage}
+                      </p>
+                    ) : null}
+
+                    {!slugError && slugStatus !== "checking" && slugStatus !== "taken" && slugStatus !== "error" ? (
+                      <p className="text-sm text-muted-foreground">
+                        Twoje zaproszenie będzie dostępne pod: https://{slug.trim() || "..."}.twojadomena.pl
+                      </p>
+                    ) : null}
+
+                    {slugError ? <p className="text-sm text-red-700">{slugError}</p> : null}
                   </div>
 
                   <div className="space-y-2">
