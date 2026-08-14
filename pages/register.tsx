@@ -18,9 +18,11 @@ import { createClient } from "@/lib/supabase/client";
 const validateSlug = (s: string) => {
   if (!s) return "Adres nie może być pusty";
   if (s.length < 3 || s.length > 50) return "Adres musi mieć 3–50 znaków";
-  if (!/^[a-z0-9-]+$/.test(s)) return "Adres może zawierać tylko: a-z, 0-9 i myślnik";
+  if (!/^[a-z0-9-]+$/.test(s))
+    return "Adres może zawierać tylko: a-z, 0-9 i myślnik";
   if (/--/.test(s)) return "Adres nie może zawierać podwójnych myślników";
-  if (/^-|-$/.test(s)) return "Adres nie może zaczynać się ani kończyć myślnikiem";
+  if (/^-|-$/.test(s))
+    return "Adres nie może zaczynać się ani kończyć myślnikiem";
   return null;
 };
 
@@ -29,7 +31,9 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [slug, setSlug] = useState("");
   const [slugError, setSlugError] = useState<string | null>(null);
-  const [slugStatus, setSlugStatus] = useState<"idle" | "checking" | "available" | "taken" | "error">("idle");
+  const [slugStatus, setSlugStatus] = useState<
+    "idle" | "checking" | "available" | "taken" | "error"
+  >("idle");
   const [slugMessage, setSlugMessage] = useState("");
   const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -238,7 +242,10 @@ export default function RegisterPage() {
                       </span>
                     </div>
 
-                    {slugStatus === "checking" || slugStatus === "available" || slugStatus === "taken" || slugStatus === "error" ? (
+                    {slugStatus === "checking" ||
+                    slugStatus === "available" ||
+                    slugStatus === "taken" ||
+                    slugStatus === "error" ? (
                       <p
                         className={
                           slugStatus === "available"
@@ -252,13 +259,19 @@ export default function RegisterPage() {
                       </p>
                     ) : null}
 
-                    {!slugError && slugStatus !== "checking" && slugStatus !== "taken" && slugStatus !== "error" ? (
+                    {!slugError &&
+                    slugStatus !== "checking" &&
+                    slugStatus !== "taken" &&
+                    slugStatus !== "error" ? (
                       <p className="text-sm text-muted-foreground">
-                        Twoje zaproszenie będzie dostępne pod: https://{slug.trim() || "..."}.twojadomena.pl
+                        Twoje zaproszenie będzie dostępne pod: https://
+                        {slug.trim() || "..."}.twojadomena.pl
                       </p>
                     ) : null}
 
-                    {slugError ? <p className="text-sm text-red-700">{slugError}</p> : null}
+                    {slugError ? (
+                      <p className="text-sm text-red-700">{slugError}</p>
+                    ) : null}
                   </div>
 
                   <div className="space-y-2">
@@ -302,8 +315,10 @@ export default function RegisterPage() {
               ) : (
                 <div className="space-y-4">
                   <div className="rounded-md bg-blue-50 p-4 text-sm text-blue-800">
-                    Sprawdziliśmy — wysłaliśmy wiadomość na adres <strong>{email}</strong>.
-                    Kliknij link w mailu, aby aktywować konto. Po potwierdzeniu zostaniesz przekierowany na pulpit.
+                    Sprawdziliśmy — wysłaliśmy wiadomość na adres{" "}
+                    <strong>{email}</strong>. Kliknij link w mailu, aby
+                    aktywować konto. Po potwierdzeniu zostaniesz przekierowany
+                    na pulpit.
                   </div>
 
                   <div className="flex gap-3">
@@ -315,7 +330,7 @@ export default function RegisterPage() {
               )}
 
               <p className="text-center text-sm text-muted-foreground">
-                Masz już konto?{' '}
+                Masz już konto?{" "}
                 <Link href="/login" className="underline">
                   Zaloguj się
                 </Link>

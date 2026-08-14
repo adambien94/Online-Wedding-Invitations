@@ -2,13 +2,40 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
+interface Reservation {
+  id: string;
+  slug: string;
+  status: string;
+  created_at: string;
+}
+
+interface Event {
+  id: string;
+  type: string;
+  slug: string;
+  status: string;
+  event_date: string | null;
+  created_at: string;
+  updated_at: string;
+  published_at: string | null;
+}
+
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
+  const [reservation, setReservation] = useState<Reservation | null>(null);
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const supabase = createClient();
 
@@ -24,7 +51,41 @@ export default function DashboardPage() {
       }
 
       setUser(user);
+      await fetchData(user.id);
       setLoading(false);
+    };
+
+    const fetchData = async (userId: string) => {
+      try {
+        const session = await supabase.auth.getSession();
+        const token = session.data.session?.access_token;
+
+        if (!token) {
+          setError("Nie jesteś zalogowany");
+          return;
+        }
+
+        // Fetch reservation
+        const resRes = await fetch("/api/get-reservation", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (resRes.ok) {
+          const { reservation } = await resRes.json();
+          setReservation(reservation);
+        }
+
+        // Fetch events
+        const eventsRes = await fetch("/api/get-events", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (eventsRes.ok) {
+          const { events } = await eventsRes.json();
+          setEvents(events);
+        }
+      } catch (err) {
+        console.error("Failed to fetch data:", err);
+        setError("Nie udało się załadować danych");
+      }
     };
 
     checkUser();
@@ -33,6 +94,10 @@ export default function DashboardPage() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/");
+  };
+
+  const handleCreateWedding = () => {
+    router.push("/dashboard/events/new");
   };
 
   if (loading) {
@@ -66,17 +131,91 @@ export default function DashboardPage() {
             </Button>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-8 text-center">
-            <h2 className="text-2xl font-semibold mb-4">
-              Witaj na swoim dashboardzie!
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Sprint 1 — Podstawowa autentykacja działa.
-            </p>
-            <p className="text-sm text-gray-500">
-              W następnych sprintach będą tu: wybór subdomeny, tworzenie eventów
-              i edytor.
-            </p>
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 text-red-800">
+              {error}
+            </div>
+          )}
+
+          {/* Reservation section */}
+          {reservation && (
+            <Card className="mb-8">
+              <CardContent className="pt-6">
+                <h2 className="text-sm font-medium text-gray-600 mb-1">
+                  Twoja subdomena
+                </h2>
+                <p className="text-2xl font-semibold font-serif">
+                  {reservation.slug}.twojadomena.pl
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Events section */}
+          <div>
+            {events.length === 0 ? (
+              <Card>
+                <CardContent className="pt-8 text-center">
+                  <h2 className="text-xl font-semibold mb-2">
+                    Nie utworzyłeś jeszcze wesela
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    Zacznij od utworzenia swojego pierwszego wesela.
+                  </p>
+                  <Button onClick={handleCreateWedding} size="lg">
+                    Utwórz wesele
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Twoje wesela</h2>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {events.map((event) => (
+                    <Card key={event.id}>
+                      <CardContent className="pt-6">
+                        <CardTitle className="text-lg mb-1 line-clamp-1">
+                          Wesele
+                        </CardTitle>
+                        {event.event_date && (
+                          <p className="text-sm text-gray-600 mb-2">
+                            {new Date(event.event_date).toLocaleDateString(
+                              "pl-PL",
+                            )}
+                          </p>
+                        )}
+                        <p className="text-xs text-gray-500 mb-4">
+                          {event.slug}.twojadomena.pl
+                        </p>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                          >
+                            Edytuj
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                          >
+                            Goście
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                          >
+                            Otwórz
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </main>
       </div>
