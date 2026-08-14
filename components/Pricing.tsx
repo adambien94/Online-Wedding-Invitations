@@ -65,7 +65,7 @@ export default function Pricing() {
             <Card key={p.title} className="">
               <CardHeader>
                 <CardTitle>{p.title}</CardTitle>
-                <CardDescription className="text-3xl text-neutral-700 font-bold">
+                <CardDescription className="text-3xl text-neutral-600 font-bold">
                   {p.price}
                 </CardDescription>
                 <p className="text-muted-foreground font-bold text-xs">

@@ -75,11 +75,11 @@ export default function Features() {
               return (
                 <div key={it.title} className="shadow-none">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
+                    {/* <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
                       <Icon className="h-5 w-5" />
-                    </div>
+                    </div> */}
                     <div>
-                      <h2 className="font-base ">{it.title}</h2>
+                      <h2 className="font-base font-medium">{it.title}</h2>
                       <p className="text-muted-foreground text-sm">{it.desc}</p>
                     </div>
                   </div>
