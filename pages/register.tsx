@@ -192,7 +192,19 @@ export default function RegisterPage() {
       </Head>
 
       <div className="min-h-screen bg-gray-100">
-        <NavBar />
+        {/* <NavBar /> */}
+        <header className="w-full">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-start h-16">
+              <div className="flex items-center">
+                <Link href="/" className="text-3xl font-serif text-neutral-900">
+                  Weseleo
+                </Link>
+              </div>
+              <div className="md:hidden">{/* mobile menu placeholder */}</div>
+            </div>
+          </div>
+        </header>
 
         <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
           <Card className="w-full max-w-md shadow-xl">
@@ -228,7 +240,7 @@ export default function RegisterPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="slug">Adres Twojego zaproszenia</Label>
-                    <div className="flex gap-2">
+                    <div className="flex">
                       <Input
                         id="slug"
                         type="text"
@@ -237,8 +249,8 @@ export default function RegisterPage() {
                         onChange={(e) => setSlug(e.target.value.toLowerCase())}
                         required
                       />
-                      <span className="inline-flex items-center px-3 text-sm text-muted-foreground">
-                        .twojadomena.pl
+                      <span className="inline-flex items-center pr-3 pl-1 text-sm text-muted-foreground">
+                        .weseleo.pl
                       </span>
                     </div>
 
@@ -262,10 +274,14 @@ export default function RegisterPage() {
                     {!slugError &&
                     slugStatus !== "checking" &&
                     slugStatus !== "taken" &&
-                    slugStatus !== "error" ? (
+                    slugStatus !== "error" &&
+                    slug ? (
                       <p className="text-sm text-muted-foreground">
-                        Twoje zaproszenie będzie dostępne pod: https://
-                        {slug.trim() || "..."}.twojadomena.pl
+                        Twoje zaproszenie będzie dostępne pod: <br />{" "}
+                        <span className="underline">
+                          https://
+                          {slug.trim() || "..."}.weseleo.pl
+                        </span>
                       </p>
                     ) : null}
 

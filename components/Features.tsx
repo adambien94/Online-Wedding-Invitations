@@ -62,7 +62,7 @@ export default function Features() {
         </div>
 
         <div className="lg:w-2/4">
-          <h2 className="text-3xl font-serif font-base text-gray-900">
+          <h2 className="text-3xl font-serif font-base text-neutral-900">
             Goście wiedzą, co dzieje się dalej
           </h2>
           <p className="mt-2 text-muted-foreground">

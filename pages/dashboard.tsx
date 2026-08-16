@@ -118,7 +118,7 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50">
         <NavBar />
 
-        <main className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <main className="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex justify-between items-start mb-8">
             <div>
               <h1 className="text-4xl font-bold font-serif mb-2">Dashboard</h1>

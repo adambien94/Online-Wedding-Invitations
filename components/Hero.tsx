@@ -13,6 +13,9 @@ export default function Hero() {
             <h1 className="mt-4 font-serif text-4xl sm:text-5xl font-base text-gray-900">
               Nasz Dzień
             </h1>
+            {/* <p className="mt-4 lg:text-2xl text-neutral-900">
+              Jedna piękna strona dla wszystkich gości
+            </p> */}
             <p className="mt-4 lg:text-lg text-muted-foreground">
               Jedna piękna strona dla wszystkich gości — zdjęcia, harmonogram,
               menu i więcej.
@@ -31,6 +34,10 @@ export default function Hero() {
               >
                 Zobacz możliwości
               </Button>
+            </div>
+            <div className="text-xs text-muted-foreground mt-6">
+              <span className="text-neutral-900 font-bold">od 199zł</span> /{" "}
+              <span>miesiąc</span>
             </div>
           </div>
           <div className="lg:ml-auto">{/* <InviteForm /> */}</div>
