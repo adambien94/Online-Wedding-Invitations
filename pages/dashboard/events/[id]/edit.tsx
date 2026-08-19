@@ -495,6 +495,31 @@ export default function EditEventPage() {
               </div>
             </Section>
 
+            {/* Template */}
+            <Section title="Szablon zaproszenia">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-700 font-medium">
+                    {config.template?.key === "modern"
+                      ? "Nowoczesny"
+                      : "Klasyczny"}
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    Zmień wygląd zaproszenia bez utraty danych
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() =>
+                    router.push(`/dashboard/events/${id}/template`)
+                  }
+                >
+                  Zmień szablon
+                </Button>
+              </div>
+            </Section>
+
             {/* Preview */}
             <Section title="Podgląd treści">
               <ContentPreview config={config} />

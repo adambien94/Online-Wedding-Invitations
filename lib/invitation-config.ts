@@ -31,6 +31,10 @@ export interface InvitationConfig {
   };
   schedule: ScheduleItem[];
   faq: FaqItem[];
+  template: {
+    key: string;
+    version: number;
+  };
   theme: {
     primaryColor: string | null;
   };
@@ -66,6 +70,10 @@ export const defaultInvitationConfig: InvitationConfig = {
   },
   schedule: [],
   faq: [],
+  template: {
+    key: "classic",
+    version: 1,
+  },
   theme: {
     primaryColor: null,
   },
