@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import NavBar from "@/components/NavBar";
 import { createClient } from "@/lib/supabase/client";
 
 const validateSlug = (s: string) => {
@@ -38,7 +35,6 @@ export default function RegisterPage() {
   const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
   const supabase = createClient();
 
   useEffect(() => {
@@ -192,7 +188,6 @@ export default function RegisterPage() {
       </Head>
 
       <div className="min-h-screen bg-gray-100">
-        {/* <NavBar /> */}
         <header className="w-full">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-start h-16">
@@ -201,7 +196,6 @@ export default function RegisterPage() {
                   Weseleo
                 </Link>
               </div>
-              <div className="md:hidden">{/* mobile menu placeholder */}</div>
             </div>
           </div>
         </header>
