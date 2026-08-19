@@ -6,7 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NavBar from "@/components/NavBar";
 import { createClient } from "@/lib/supabase/client";
-import type { InvitationConfig, ScheduleItem, FaqItem } from "@/lib/invitation-config";
+import type {
+  InvitationConfig,
+  ScheduleItem,
+  FaqItem,
+} from "@/lib/invitation-config";
 
 const AUTOSAVE_DELAY = 1200;
 
@@ -25,7 +29,9 @@ export default function EditEventPage() {
   const supabase = createClient();
 
   const [loading, setLoading] = useState(true);
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [saveStatus, setSaveStatus] = useState<
+    "idle" | "saving" | "saved" | "error"
+  >("idle");
   const [error, setError] = useState<string | null>(null);
   const [config, setConfig] = useState<InvitationConfig | null>(null);
 
@@ -108,7 +114,10 @@ export default function EditEventPage() {
   }, [debouncedConfig]);
 
   const update = useCallback(
-    <K extends keyof InvitationConfig>(section: K, value: InvitationConfig[K]) => {
+    <K extends keyof InvitationConfig>(
+      section: K,
+      value: InvitationConfig[K],
+    ) => {
       setConfig((prev) => (prev ? { ...prev, [section]: value } : prev));
     },
     [],
@@ -135,11 +144,17 @@ export default function EditEventPage() {
   // Schedule helpers
   const addScheduleItem = () => {
     setConfig((prev) =>
-      prev ? { ...prev, schedule: [...prev.schedule, { time: "", label: "" }] } : prev,
+      prev
+        ? { ...prev, schedule: [...prev.schedule, { time: "", label: "" }] }
+        : prev,
     );
   };
 
-  const updateScheduleItem = (index: number, field: keyof ScheduleItem, value: string) => {
+  const updateScheduleItem = (
+    index: number,
+    field: keyof ScheduleItem,
+    value: string,
+  ) => {
     setConfig((prev) => {
       if (!prev) return prev;
       const updated = prev.schedule.map((item, i) =>
@@ -151,18 +166,26 @@ export default function EditEventPage() {
 
   const removeScheduleItem = (index: number) => {
     setConfig((prev) =>
-      prev ? { ...prev, schedule: prev.schedule.filter((_, i) => i !== index) } : prev,
+      prev
+        ? { ...prev, schedule: prev.schedule.filter((_, i) => i !== index) }
+        : prev,
     );
   };
 
   // FAQ helpers
   const addFaqItem = () => {
     setConfig((prev) =>
-      prev ? { ...prev, faq: [...prev.faq, { question: "", answer: "" }] } : prev,
+      prev
+        ? { ...prev, faq: [...prev.faq, { question: "", answer: "" }] }
+        : prev,
     );
   };
 
-  const updateFaqItem = (index: number, field: keyof FaqItem, value: string) => {
+  const updateFaqItem = (
+    index: number,
+    field: keyof FaqItem,
+    value: string,
+  ) => {
     setConfig((prev) => {
       if (!prev) return prev;
       const updated = prev.faq.map((item, i) =>
@@ -226,20 +249,24 @@ export default function EditEventPage() {
             </span>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-4">
             {/* Para */}
             <Section title="Para">
               <Field label="Imię pierwszej osoby">
                 <Input
                   value={config.couple.person1}
-                  onChange={(e) => updateNested("couple", "person1", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("couple", "person1", e.target.value)
+                  }
                   placeholder="np. Anna"
                 />
               </Field>
               <Field label="Imię drugiej osoby">
                 <Input
                   value={config.couple.person2}
-                  onChange={(e) => updateNested("couple", "person2", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("couple", "person2", e.target.value)
+                  }
                   placeholder="np. Marek"
                 />
               </Field>
@@ -251,14 +278,18 @@ export default function EditEventPage() {
                 <Input
                   type="date"
                   value={config.event.date}
-                  onChange={(e) => updateNested("event", "date", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("event", "date", e.target.value)
+                  }
                 />
               </Field>
               <Field label="Godzina (opcjonalnie)">
                 <Input
                   type="time"
                   value={config.event.time}
-                  onChange={(e) => updateNested("event", "time", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("event", "time", e.target.value)
+                  }
                 />
               </Field>
             </Section>
@@ -268,14 +299,18 @@ export default function EditEventPage() {
               <Field label="Tytuł">
                 <Input
                   value={config.hero.title}
-                  onChange={(e) => updateNested("hero", "title", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("hero", "title", e.target.value)
+                  }
                   placeholder="np. Pobieramy się!"
                 />
               </Field>
               <Field label="Podtytuł">
                 <Input
                   value={config.hero.subtitle}
-                  onChange={(e) => updateNested("hero", "subtitle", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("hero", "subtitle", e.target.value)
+                  }
                   placeholder="np. Będzie nam miło świętować razem z Wami"
                 />
               </Field>
@@ -286,14 +321,18 @@ export default function EditEventPage() {
               <Field label="Nazwa miejsca">
                 <Input
                   value={config.ceremony.name}
-                  onChange={(e) => updateNested("ceremony", "name", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("ceremony", "name", e.target.value)
+                  }
                   placeholder="np. Kościół Wniebowzięcia NMP"
                 />
               </Field>
               <Field label="Adres">
                 <Input
                   value={config.ceremony.address}
-                  onChange={(e) => updateNested("ceremony", "address", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("ceremony", "address", e.target.value)
+                  }
                   placeholder="np. ul. Kościelna 1, Kraków"
                 />
               </Field>
@@ -304,14 +343,18 @@ export default function EditEventPage() {
               <Field label="Nazwa sali">
                 <Input
                   value={config.reception.name}
-                  onChange={(e) => updateNested("reception", "name", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("reception", "name", e.target.value)
+                  }
                   placeholder="np. Sala Weselna Róża"
                 />
               </Field>
               <Field label="Adres">
                 <Input
                   value={config.reception.address}
-                  onChange={(e) => updateNested("reception", "address", e.target.value)}
+                  onChange={(e) =>
+                    updateNested("reception", "address", e.target.value)
+                  }
                   placeholder="np. ul. Parkowa 5, Kraków"
                 />
               </Field>
@@ -325,12 +368,16 @@ export default function EditEventPage() {
                     <Input
                       className="w-24 shrink-0"
                       value={item.time}
-                      onChange={(e) => updateScheduleItem(i, "time", e.target.value)}
+                      onChange={(e) =>
+                        updateScheduleItem(i, "time", e.target.value)
+                      }
                       placeholder="15:00"
                     />
                     <Input
                       value={item.label}
-                      onChange={(e) => updateScheduleItem(i, "label", e.target.value)}
+                      onChange={(e) =>
+                        updateScheduleItem(i, "label", e.target.value)
+                      }
                       placeholder="Ceremonia"
                     />
                     <button
@@ -352,9 +399,14 @@ export default function EditEventPage() {
             <Section title="FAQ">
               <div className="space-y-4">
                 {config.faq.map((item, i) => (
-                  <div key={i} className="space-y-2 border border-gray-200 rounded-lg p-3">
+                  <div
+                    key={i}
+                    className="space-y-2 border border-gray-200 rounded-lg p-3"
+                  >
                     <div className="flex justify-between items-center">
-                      <span className="text-xs text-gray-500 font-medium">#{i + 1}</span>
+                      <span className="text-xs text-gray-500 font-medium">
+                        #{i + 1}
+                      </span>
                       <button
                         onClick={() => removeFaqItem(i)}
                         className="text-gray-400 hover:text-red-500 text-lg leading-none"
@@ -365,12 +417,16 @@ export default function EditEventPage() {
                     </div>
                     <Input
                       value={item.question}
-                      onChange={(e) => updateFaqItem(i, "question", e.target.value)}
+                      onChange={(e) =>
+                        updateFaqItem(i, "question", e.target.value)
+                      }
                       placeholder="Pytanie"
                     />
                     <Input
                       value={item.answer}
-                      onChange={(e) => updateFaqItem(i, "answer", e.target.value)}
+                      onChange={(e) =>
+                        updateFaqItem(i, "answer", e.target.value)
+                      }
                       placeholder="Odpowiedź"
                     />
                   </div>
@@ -401,7 +457,7 @@ function Section({
 }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6">
-      <h2 className="text-base font-semibold mb-4 text-gray-800">{title}</h2>
+      <h2 className="text-base font-semibold mb-4 text-neutral-900">{title}</h2>
       <div className="space-y-4">{children}</div>
     </div>
   );
@@ -416,7 +472,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1.5">
-      <Label className="text-sm text-gray-600">{label}</Label>
+      <Label className="text-sm text-muted-foreground">{label}</Label>
       {children}
     </div>
   );
@@ -432,12 +488,16 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
   return (
     <div className="space-y-5 text-sm text-gray-700">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">Para</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
+          Para
+        </p>
         <p className="text-lg font-serif font-semibold">{coupleTitle}</p>
       </div>
       {(event.date || event.time) && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">Data</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
+            Data
+          </p>
           <p>
             {event.date
               ? new Date(event.date).toLocaleDateString("pl-PL", {
@@ -452,31 +512,45 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
         </div>
       )}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">Hero</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
+          Hero
+        </p>
         <p className="font-medium">{hero.title || "—"}</p>
         {hero.subtitle && <p className="text-gray-500">{hero.subtitle}</p>}
       </div>
       {(ceremony.name || ceremony.address) && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">Ceremonia</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
+            Ceremonia
+          </p>
           {ceremony.name && <p className="font-medium">{ceremony.name}</p>}
-          {ceremony.address && <p className="text-gray-500">{ceremony.address}</p>}
+          {ceremony.address && (
+            <p className="text-gray-500">{ceremony.address}</p>
+          )}
         </div>
       )}
       {(reception.name || reception.address) && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">Przyjęcie</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
+            Przyjęcie
+          </p>
           {reception.name && <p className="font-medium">{reception.name}</p>}
-          {reception.address && <p className="text-gray-500">{reception.address}</p>}
+          {reception.address && (
+            <p className="text-gray-500">{reception.address}</p>
+          )}
         </div>
       )}
       {schedule.length > 0 && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Harmonogram</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+            Harmonogram
+          </p>
           <ul className="space-y-1">
             {schedule.map((s, i) => (
               <li key={i} className="flex gap-3">
-                <span className="w-14 shrink-0 font-mono text-gray-400">{s.time}</span>
+                <span className="w-14 shrink-0 font-mono text-gray-400">
+                  {s.time}
+                </span>
                 <span>{s.label}</span>
               </li>
             ))}
@@ -485,7 +559,9 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
       )}
       {faq.length > 0 && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">FAQ</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+            FAQ
+          </p>
           <ul className="space-y-3">
             {faq.map((f, i) => (
               <li key={i}>
