@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
+import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { templateRegistry } from "@/features/templates/registry";
@@ -95,11 +96,7 @@ export default function ChooseTemplatePage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Ładowanie…</p>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (error || !config) {

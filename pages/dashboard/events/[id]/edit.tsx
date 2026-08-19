@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NavBar from "@/components/NavBar";
+import Spinner from "@/components/ui/Spinner";
 import { createClient } from "@/lib/supabase/client";
 import type {
   InvitationConfig,
@@ -202,11 +203,7 @@ export default function EditEventPage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Ładowanie...</div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (error || !config) {
@@ -475,7 +472,9 @@ export default function EditEventPage() {
                     key={key}
                     className="flex items-center justify-between gap-4 cursor-pointer group"
                   >
-                    <span className="text-sm text-neutral-900 group-hover:text-neutral-900">
+                    <span
+                      className={`text-sm  ${config.sections[key] ? "text-neutral-900" : "text-gray-400"}`}
+                    >
                       {label}
                     </span>
                     <button
@@ -508,12 +507,12 @@ export default function EditEventPage() {
             <Section title="Szablon zaproszenia">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-700 font-medium">
+                  <p className="text-sm text-neutral-900 font-medium">
                     {config.template?.key === "modern"
                       ? "Nowoczesny"
                       : "Klasyczny"}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     Zmień wygląd zaproszenia bez utraty danych
                   </p>
                 </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NavBar from "@/components/NavBar";
+import Spinner from "@/components/ui/Spinner";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
@@ -116,11 +117,7 @@ export default function NewEventPage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Ładowanie...</div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   return (

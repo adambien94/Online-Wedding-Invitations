@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
+import Spinner from "@/components/ui/Spinner";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import type { InvitationConfig } from "@/lib/invitation-config";
@@ -108,11 +109,7 @@ export default function DashboardPage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Ładowanie...</div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   return (
