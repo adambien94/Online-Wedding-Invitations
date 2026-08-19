@@ -5,18 +5,24 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardTitle,
 } from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
+import type { InvitationConfig } from "@/lib/invitation-config";
 
 interface Reservation {
   id: string;
   slug: string;
   status: string;
   created_at: string;
+}
+
+interface EventDraftSummary {
+  config: InvitationConfig;
+  version: number;
+  updated_at: string;
 }
 
 interface Event {
@@ -28,6 +34,7 @@ interface Event {
   created_at: string;
   updated_at: string;
   published_at: string | null;
+  event_drafts: EventDraftSummary[];
 }
 
 export default function DashboardPage() {
@@ -171,11 +178,18 @@ export default function DashboardPage() {
               <div>
                 <h2 className="text-xl font-semibold mb-4">Twoje wesela</h2>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {events.map((event) => (
+                  {events.map((event) => {
+                    const draft = event.event_drafts?.[0];
+                    const couple = draft?.config?.couple;
+                    const coupleTitle =
+                      couple?.person1 && couple?.person2
+                        ? `${couple.person1} & ${couple.person2}`
+                        : "Wesele";
+                    return (
                     <Card key={event.id}>
                       <CardContent>
                         <CardTitle className="text-lg mb-1 line-clamp-1">
-                          Wesele
+                          {coupleTitle}
                         </CardTitle>
                         {event.event_date && (
                           <p className="text-sm text-gray-600 mb-2">
@@ -192,6 +206,11 @@ export default function DashboardPage() {
                             variant="outline"
                             size="sm"
                             className="flex-1"
+                            onClick={() =>
+                              router.push(
+                                `/dashboard/events/${event.id}/edit`,
+                              )
+                            }
                           >
                             Edytuj
                           </Button>
@@ -212,7 +231,8 @@ export default function DashboardPage() {
                         </div>
                       </CardContent>
                     </Card>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

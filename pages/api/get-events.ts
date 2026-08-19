@@ -31,11 +31,11 @@ export default async function handler(
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    // Get user's events (events where user is owner)
+    // Get user's events with their drafts
     const { data: events, error: eventsError } = await sb
       .from("events")
       .select(
-        "id, type, slug, status, event_date, created_at, updated_at, published_at",
+        "id, type, slug, status, event_date, created_at, updated_at, published_at, event_drafts(config, version, updated_at)",
       )
       .eq("owner_id", user.id)
       .order("created_at", { ascending: false });

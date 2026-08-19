@@ -107,7 +107,7 @@ export default function NewEventPage() {
         return;
       }
 
-      router.push("/dashboard");
+      router.push(`/dashboard/events/${data.event.id}/edit`);
     } catch (err: any) {
       setError(err.message ?? "Błąd sieci");
     } finally {

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "@supabase/supabase-js";
+import { defaultInvitationConfig } from "@/lib/invitation-config";
 
 export default async function handler(
   req: NextApiRequest,
@@ -75,6 +76,28 @@ export default async function handler(
     return res
       .status(500)
       .json({ message: eventError?.message ?? "Błąd tworzenia eventu" });
+
+  // Build initial draft config from form data
+  const draftConfig = {
+    ...defaultInvitationConfig,
+    couple: { person1, person2 },
+    event: {
+      date: eventDate ?? "",
+      time: eventTime ?? "",
+    },
+  };
+
+  // Create the event draft
+  const { error: draftError } = await sb.from("event_drafts").insert({
+    event_id: event.id,
+    config: draftConfig,
+    version: 1,
+  });
+
+  if (draftError)
+    return res
+      .status(500)
+      .json({ message: draftError.message ?? "Błąd tworzenia draftu" });
 
   // Mark the reservation as claimed
   const { error: claimError } = await sb
