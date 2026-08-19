@@ -159,7 +159,15 @@ body {
   }
 }
 
-/* Override Tailwind's `font-serif` utility to use Cormorant Garamond everywhere */
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
 .font-serif {
   font-family:
     "Cormorant Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
