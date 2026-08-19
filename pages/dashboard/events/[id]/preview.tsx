@@ -71,7 +71,7 @@ export default function PreviewPage() {
 
       if (!res.ok) throw new Error("Błąd publikacji");
 
-      router.push(`/dashboard/events/${id}`);
+      router.push(`/dashboard/events/${id}/edit`);
     } catch {
       setError("Błąd publikacji — spróbuj ponownie");
     } finally {
