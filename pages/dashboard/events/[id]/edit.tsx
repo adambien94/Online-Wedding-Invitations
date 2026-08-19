@@ -240,13 +240,22 @@ export default function EditEventPage() {
               <span className="text-gray-300">/</span>
               <h1 className="text-xl font-semibold">Edytor zaproszenia</h1>
             </div>
-            <span className="text-sm text-gray-400">
-              {saveStatus === "saving" && "Zapisywanie…"}
-              {saveStatus === "saved" && "Zapisano"}
-              {saveStatus === "error" && (
-                <span className="text-red-500">Błąd zapisu</span>
-              )}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-400">
+                {saveStatus === "saving" && "Zapisywanie…"}
+                {saveStatus === "saved" && "Zapisano"}
+                {saveStatus === "error" && (
+                  <span className="text-red-500">Błąd zapisu</span>
+                )}
+              </span>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => router.push(`/dashboard/events/${id}/preview`)}
+              >
+                Podgląd →
+              </Button>
+            </div>
           </div>
 
           <div className="space-y-4">
