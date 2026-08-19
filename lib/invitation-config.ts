@@ -74,7 +74,7 @@ export const defaultInvitationConfig: InvitationConfig = {
     locations: true,
     schedule: true,
     rsvp: true,
-    faq: false,
+    faq: true,
   },
 };
 

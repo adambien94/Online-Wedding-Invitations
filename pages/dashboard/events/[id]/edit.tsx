@@ -361,79 +361,137 @@ export default function EditEventPage() {
             </Section>
 
             {/* Harmonogram */}
-            <Section title="Harmonogram">
-              <div className="space-y-3">
-                {config.schedule.map((item, i) => (
-                  <div key={i} className="flex gap-2 items-start">
-                    <Input
-                      className="w-24 shrink-0"
-                      value={item.time}
-                      onChange={(e) =>
-                        updateScheduleItem(i, "time", e.target.value)
-                      }
-                      placeholder="15:00"
-                    />
-                    <Input
-                      value={item.label}
-                      onChange={(e) =>
-                        updateScheduleItem(i, "label", e.target.value)
-                      }
-                      placeholder="Ceremonia"
-                    />
-                    <button
-                      onClick={() => removeScheduleItem(i)}
-                      className="mt-2 text-gray-400 hover:text-red-500 text-lg leading-none shrink-0"
-                      aria-label="Usuń"
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-                <Button variant="outline" size="sm" onClick={addScheduleItem}>
-                  + Dodaj pozycję
-                </Button>
-              </div>
-            </Section>
-
-            {/* FAQ */}
-            <Section title="FAQ">
-              <div className="space-y-4">
-                {config.faq.map((item, i) => (
-                  <div
-                    key={i}
-                    className="space-y-2 border border-gray-200 rounded-lg p-3"
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-gray-500 font-medium">
-                        #{i + 1}
-                      </span>
+            {config.sections.schedule && (
+              <Section title="Harmonogram">
+                <div className="space-y-3">
+                  {config.schedule.map((item, i) => (
+                    <div key={i} className="flex gap-2 items-start">
+                      <Input
+                        className="w-24 shrink-0"
+                        value={item.time}
+                        onChange={(e) =>
+                          updateScheduleItem(i, "time", e.target.value)
+                        }
+                        placeholder="15:00"
+                      />
+                      <Input
+                        value={item.label}
+                        onChange={(e) =>
+                          updateScheduleItem(i, "label", e.target.value)
+                        }
+                        placeholder="Ceremonia"
+                      />
                       <button
-                        onClick={() => removeFaqItem(i)}
-                        className="text-gray-400 hover:text-red-500 text-lg leading-none"
+                        onClick={() => removeScheduleItem(i)}
+                        className="mt-2 text-gray-400 hover:text-red-500 text-lg leading-none shrink-0"
                         aria-label="Usuń"
                       >
                         ×
                       </button>
                     </div>
-                    <Input
-                      value={item.question}
-                      onChange={(e) =>
-                        updateFaqItem(i, "question", e.target.value)
+                  ))}
+                  <Button variant="outline" size="sm" onClick={addScheduleItem}>
+                    + Dodaj pozycję
+                  </Button>
+                </div>
+              </Section>
+            )}
+
+            {/* FAQ */}
+            {config.sections.faq && (
+              <Section title="FAQ">
+                <div className="space-y-4">
+                  {config.faq.map((item, i) => (
+                    <div
+                      key={i}
+                      className="space-y-2 border border-gray-200 rounded-lg p-3"
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-500 font-medium">
+                          #{i + 1}
+                        </span>
+                        <button
+                          onClick={() => removeFaqItem(i)}
+                          className="text-gray-400 hover:text-red-500 text-lg leading-none"
+                          aria-label="Usuń"
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <Input
+                        value={item.question}
+                        onChange={(e) =>
+                          updateFaqItem(i, "question", e.target.value)
+                        }
+                        placeholder="Pytanie"
+                      />
+                      <Input
+                        value={item.answer}
+                        onChange={(e) =>
+                          updateFaqItem(i, "answer", e.target.value)
+                        }
+                        placeholder="Odpowiedź"
+                      />
+                    </div>
+                  ))}
+                  <Button variant="outline" size="sm" onClick={addFaqItem}>
+                    + Dodaj pytanie
+                  </Button>
+                </div>
+              </Section>
+            )}
+
+            {/* Widoczność sekcji */}
+            <Section title="Widoczność sekcji">
+              <p className="text-sm text-muted-foreground -mt-1 mb-2">
+                Zdecyduj, które sekcje mają pojawić się w zaproszeniu.
+              </p>
+              <div className="space-y-3">
+                {(
+                  [
+                    { key: "hero", label: "Hero" },
+                    {
+                      key: "locations",
+                      label: "Lokalizacje (ceremonia i przyjęcie)",
+                    },
+                    { key: "schedule", label: "Harmonogram" },
+                    { key: "rsvp", label: "RSVP" },
+                    { key: "faq", label: "FAQ" },
+                  ] as {
+                    key: keyof InvitationConfig["sections"];
+                    label: string;
+                  }[]
+                ).map(({ key, label }) => (
+                  <label
+                    key={key}
+                    className="flex items-center justify-between gap-4 cursor-pointer group"
+                  >
+                    <span className="text-sm text-neutral-900 group-hover:text-neutral-900">
+                      {label}
+                    </span>
+                    <button
+                      role="switch"
+                      aria-checked={config.sections[key]}
+                      onClick={() =>
+                        update("sections", {
+                          ...config.sections,
+                          [key]: !config.sections[key],
+                        })
                       }
-                      placeholder="Pytanie"
-                    />
-                    <Input
-                      value={item.answer}
-                      onChange={(e) =>
-                        updateFaqItem(i, "answer", e.target.value)
-                      }
-                      placeholder="Odpowiedź"
-                    />
-                  </div>
+                      className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 ${
+                        config.sections[key] ? "bg-rose-500" : "bg-gray-200"
+                      }`}
+                    >
+                      <span
+                        className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow-sm transform transition-transform ${
+                          config.sections[key]
+                            ? "translate-x-4"
+                            : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </label>
                 ))}
-                <Button variant="outline" size="sm" onClick={addFaqItem}>
-                  + Dodaj pytanie
-                </Button>
               </div>
             </Section>
 
@@ -479,14 +537,15 @@ function Field({
 }
 
 function ContentPreview({ config }: { config: InvitationConfig }) {
-  const { couple, event, hero, ceremony, reception, schedule, faq } = config;
+  const { couple, event, hero, ceremony, reception, schedule, faq, sections } =
+    config;
   const coupleTitle =
     couple.person1 && couple.person2
       ? `${couple.person1} & ${couple.person2}`
       : "—";
 
   return (
-    <div className="space-y-5 text-sm text-gray-700">
+    <div className="space-y-5 text-sm text-neutral-700">
       <div>
         <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
           Para
@@ -511,14 +570,16 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
           </p>
         </div>
       )}
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
-          Hero
-        </p>
-        <p className="font-medium">{hero.title || "—"}</p>
-        {hero.subtitle && <p className="text-gray-500">{hero.subtitle}</p>}
-      </div>
-      {(ceremony.name || ceremony.address) && (
+      {sections.hero && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
+            Hero
+          </p>
+          <p className="font-medium">{hero.title || "—"}</p>
+          {hero.subtitle && <p className="text-gray-500">{hero.subtitle}</p>}
+        </div>
+      )}
+      {sections.locations && (ceremony.name || ceremony.address) && (
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
             Ceremonia
@@ -529,7 +590,7 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
           )}
         </div>
       )}
-      {(reception.name || reception.address) && (
+      {sections.locations && (reception.name || reception.address) && (
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">
             Przyjęcie
@@ -540,7 +601,7 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
           )}
         </div>
       )}
-      {schedule.length > 0 && (
+      {sections.schedule && schedule.length > 0 && (
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
             Harmonogram
@@ -557,7 +618,7 @@ function ContentPreview({ config }: { config: InvitationConfig }) {
           </ul>
         </div>
       )}
-      {faq.length > 0 && (
+      {sections.faq && faq.length > 0 && (
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
             FAQ

@@ -853,7 +853,7 @@ Pozwolić użytkownikowi decydować, które elementy mają pojawić się w zapro
 [x] Lokalizacje
 [x] Harmonogram
 [x] RSVP
-[ ] FAQ
+[x] FAQ
 ```
 
 Config:
