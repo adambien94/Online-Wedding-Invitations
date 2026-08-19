@@ -107,44 +107,39 @@ export default function PreviewPage() {
         <NavBar />
 
         {/* Toolbar */}
-        <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 min-w-0">
-              <button
-                onClick={() => router.push(`/dashboard/events/${id}/edit`)}
-                className="text-sm text-gray-500 hover:text-gray-700 whitespace-nowrap"
-              >
-                ← Wróć do edycji
-              </button>
-              <span className="text-gray-300 hidden sm:block">/</span>
-              <span className="text-sm font-medium text-gray-700 hidden sm:block truncate">
-                Podgląd
-              </span>
-            </div>
 
-            <div className="flex items-center gap-2 shrink-0">
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => router.push(`/dashboard/events/${id}/template`)}
-              >
-                Zmień szablon
-              </Button>
-              <Button
-                size="sm"
-                disabled={publishing}
-                className="bg-rose-900 hover:bg-rose-800 text-white"
-                onClick={handlePublish}
-              >
-                {publishing ? "Publikowanie…" : "Opublikuj"}
-              </Button>
-            </div>
+        <div className="max-w-4xl w-full mx-auto flex items-center justify-between gap-3 py-10 px-4 sm:px-6">
+          <div className="flex items-center gap-3 min-w-0">
+            <button
+              onClick={() => router.push(`/dashboard/events/${id}/edit`)}
+              className="text-sm text-gray-500 hover:text-gray-700 whitespace-nowrap"
+            >
+              ← Edycja
+            </button>
+            <span className="text-gray-300 hidden sm:block">/</span>
+            <span className="text-sm font-medium text-gray-700 hidden sm:block truncate">
+              Podgląd
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() =>
+                router.push(`/dashboard/events/${id}/template?from=preview`)
+              }
+            >
+              Zmień szablon
+            </Button>
+            <Button size="sm" disabled={publishing} onClick={handlePublish}>
+              {publishing ? "Publikowanie…" : "Opublikuj"}
+            </Button>
           </div>
         </div>
 
         {/* Invitation preview */}
-        <main className="flex-1 py-8 px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden ring-1 ring-gray-200">
+        <main className="max-w-4xl w-full mx-auto px-4 sm:px-6 mb-10">
+          <div className="w-full bg-white shadow-lg rounded-xl overflow-hidden ring-1 ring-gray-200 ">
             <InvitationRenderer templateKey={templateKey} config={config} />
           </div>
         </main>

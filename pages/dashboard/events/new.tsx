@@ -138,7 +138,7 @@ export default function NewEventPage() {
             onClick={() => router.push("/dashboard")}
             className="text-sm text-gray-500 hover:text-gray-700 mb-6 flex items-center gap-1"
           >
-            ← Wróć do dashboardu
+            ← Dashboard
           </button>
 
           <h1 className="text-3xl font-bold font-serif mb-2">Utwórz wesele</h1>
@@ -193,7 +193,9 @@ export default function NewEventPage() {
               <div className="space-y-2">
                 <Label htmlFor="eventTime">
                   Godzina{" "}
-                  <span className="text-gray-400 font-normal">(opcjonalnie)</span>
+                  <span className="text-gray-400 font-normal">
+                    (opcjonalnie)
+                  </span>
                 </Label>
                 <Input
                   id="eventTime"

@@ -55,7 +55,9 @@ export default function ModernTemplate({ config }: Props) {
                 </p>
                 <p className="text-2xl font-light">{ceremony.name}</p>
                 {ceremony.address && (
-                  <p className="text-sm text-gray-500 mt-2">{ceremony.address}</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    {ceremony.address}
+                  </p>
                 )}
               </div>
             )}
@@ -66,7 +68,9 @@ export default function ModernTemplate({ config }: Props) {
                 </p>
                 <p className="text-2xl font-light">{reception.name}</p>
                 {reception.address && (
-                  <p className="text-sm text-gray-500 mt-2">{reception.address}</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    {reception.address}
+                  </p>
                 )}
               </div>
             )}

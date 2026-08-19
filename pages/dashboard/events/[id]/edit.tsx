@@ -227,7 +227,7 @@ export default function EditEventPage() {
       <div className="min-h-screen bg-gray-50">
         <NavBar />
 
-        <main className="max-w-2xl mx-auto px-4 py-10 sm:px-6">
+        <main className="max-w-4xl mx-auto px-4 py-10 sm:px-6">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
@@ -238,7 +238,7 @@ export default function EditEventPage() {
                 ← Dashboard
               </button>
               <span className="text-gray-300">/</span>
-              <h1 className="text-xl font-semibold">Edytor zaproszenia</h1>
+              <span className="text-sm">Edytor zaproszenia</span>
             </div>
             <div className="flex items-center gap-3">
               <span className="text-sm text-gray-400">
@@ -488,7 +488,7 @@ export default function EditEventPage() {
                         })
                       }
                       className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 ${
-                        config.sections[key] ? "bg-rose-500" : "bg-gray-200"
+                        config.sections[key] ? "bg-neutral-900" : "bg-gray-200"
                       }`}
                     >
                       <span

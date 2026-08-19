@@ -9,7 +9,11 @@ import type { InvitationConfig } from "@/lib/invitation-config";
 
 export default function ChooseTemplatePage() {
   const router = useRouter();
-  const { id } = router.query as { id: string };
+  const { id, from } = router.query as { id: string; from?: string };
+  const backPath =
+    from === "preview"
+      ? `/dashboard/events/${id}/preview`
+      : `/dashboard/events/${id}/edit`;
   const supabase = createClient();
 
   const [config, setConfig] = useState<InvitationConfig | null>(null);
@@ -82,7 +86,7 @@ export default function ChooseTemplatePage() {
       if (!res.ok) throw new Error("Błąd zapisu");
 
       setConfig(updatedConfig);
-      router.push(`/dashboard/events/${id}/edit`);
+      router.push(backPath);
     } catch {
       setError("Błąd zapisu — spróbuj ponownie");
     } finally {
@@ -120,15 +124,15 @@ export default function ChooseTemplatePage() {
 
         <main className="max-w-4xl mx-auto px-4 py-10 sm:px-6">
           {/* Header */}
-          <div className="mb-8 flex items-center gap-3">
+          <div className="mb-10 flex items-center gap-3">
             <button
-              onClick={() => router.push(`/dashboard/events/${id}/edit`)}
+              onClick={() => router.push(backPath)}
               className="text-sm text-gray-500 hover:text-gray-700"
             >
-              ← Edytor
+              {from === "preview" ? "← Podgląd" : "← Edytor"}
             </button>
             <span className="text-gray-300">/</span>
-            <h1 className="text-xl font-semibold">Wybierz szablon</h1>
+            <h1 className="text-sm">Wybierz szablon</h1>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -139,10 +143,8 @@ export default function ChooseTemplatePage() {
               return (
                 <div
                   key={tmpl.key}
-                  className={`bg-white rounded-xl border-2 overflow-hidden flex flex-col transition-all ${
-                    isActive
-                      ? "border-rose-600 shadow-md"
-                      : "border-gray-200 hover:border-gray-300"
+                  className={`bg-white shadow-md rounded-xl border overflow-hidden flex flex-col transition-all ${
+                    isActive ? "" : "hover:shadow-lg"
                   }`}
                 >
                   {/* Thumbnail */}
@@ -151,24 +153,25 @@ export default function ChooseTemplatePage() {
                   </div>
 
                   {/* Info */}
-                  <div className="p-5 flex flex-col gap-3 flex-1">
+                  <div className="p-5 flex flex-col gap-3 flex-1 border-t">
                     <div className="flex items-center justify-between">
-                      <h2 className="font-semibold text-gray-900">{tmpl.name}</h2>
+                      <h2 className="font-semibold text-gray-900">
+                        {tmpl.name}
+                      </h2>
                       {isActive && (
-                        <span className="text-xs text-rose-600 font-medium bg-rose-50 px-2 py-0.5 rounded-full">
+                        <span className="text-xs text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">
                           Aktywny
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-500 flex-1">{tmpl.description}</p>
+                    <p className="text-sm text-gray-500 flex-1 pb-2">
+                      {tmpl.description}
+                    </p>
                     <Button
                       size="sm"
                       disabled={isActive || isSaving}
-                      className={
-                        isActive
-                          ? "bg-gray-100 text-gray-400 cursor-default"
-                          : "bg-rose-900 hover:bg-rose-800 text-white"
-                      }
+                      className={isActive ? "hidden" : ""}
+                      variant="outline"
                       onClick={() =>
                         !isActive && chooseTemplate(tmpl.key, tmpl.version)
                       }
