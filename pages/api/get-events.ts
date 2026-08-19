@@ -16,10 +16,9 @@ export default async function handler(
 
   const token = authHeader.substring(7);
 
-  // Create client with user token for RLS
   const sb = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+    process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   );
 
   try {

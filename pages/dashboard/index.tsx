@@ -140,7 +140,7 @@ export default function DashboardPage() {
           {/* Reservation section */}
           {reservation && (
             <Card className="mb-8">
-              <CardContent className="pt-6">
+              <CardContent>
                 <h2 className="text-sm font-medium text-gray-600 mb-1">
                   Twoja subdomena
                 </h2>
@@ -173,7 +173,7 @@ export default function DashboardPage() {
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {events.map((event) => (
                     <Card key={event.id}>
-                      <CardContent className="pt-6">
+                      <CardContent>
                         <CardTitle className="text-lg mb-1 line-clamp-1">
                           Wesele
                         </CardTitle>

@@ -144,6 +144,9 @@ export default function RegisterPage() {
     const { data: signData, error: signError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: { reservation_id: reservationId },
+      },
     });
 
     if (signError) {
