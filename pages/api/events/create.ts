@@ -77,7 +77,8 @@ export default async function handler(
       .status(500)
       .json({ message: eventError?.message ?? "Błąd tworzenia eventu" });
 
-  // Build initial draft config from form data
+  // Build initial draft config from form data.
+  // Template starts empty so the user must pick one before editing/publishing.
   const draftConfig = {
     ...defaultInvitationConfig,
     couple: { person1, person2 },
@@ -85,6 +86,7 @@ export default async function handler(
       date: eventDate ?? "",
       time: eventTime ?? "",
     },
+    template: { key: "", version: 0 },
   };
 
   // Create the event draft

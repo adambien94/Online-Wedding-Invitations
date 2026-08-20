@@ -108,7 +108,7 @@ export default function NewEventPage() {
         return;
       }
 
-      router.push(`/dashboard/events/${data.event.id}/edit`);
+      router.push(`/dashboard/events/${data.event.id}/edit?tab=motyw`);
     } catch (err: any) {
       setError(err.message ?? "Błąd sieci");
     } finally {

@@ -198,7 +198,7 @@ export default function DashboardPage() {
                               className="flex-1"
                               onClick={() =>
                                 router.push(
-                                  `/dashboard/events/${event.id}/edit`,
+                                  `/dashboard/events/${event.id}/edit?tab=motyw`,
                                 )
                               }
                             >
