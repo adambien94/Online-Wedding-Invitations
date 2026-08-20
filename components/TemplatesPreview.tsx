@@ -27,7 +27,7 @@ export default function TemplatesPreview() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between">
           <div>
-            <h2 className="text-3xl font-serif font-base">
+            <h2 className="text-4xl font-serif font-base">
               Przykładowe szablony
             </h2>
             <p className="mt-2 text-muted-foreground">

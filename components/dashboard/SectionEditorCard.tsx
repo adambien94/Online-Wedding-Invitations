@@ -38,9 +38,7 @@ export default function SectionEditorCard({
             <Icon className="size-5" strokeWidth={1.75} />
           </span>
           <span className="min-w-0">
-            <span className="block font-serif text-lg font-semibold leading-tight text-neutral-900">
-              {title}
-            </span>
+            <span className="block text-sm text-neutral-900">{title}</span>
             {hasToggle && (
               <span className="mt-0.5 block text-xs text-muted-foreground">
                 {visible ? "Widoczna" : "Ukryta"}
@@ -71,7 +69,7 @@ export default function SectionEditorCard({
       </div>
 
       {open && children != null && (
-        <div className="px-4 pt-4 pb-5">{children}</div>
+        <div className="px-4 pt-2 pb-5">{children}</div>
       )}
     </Card>
   );

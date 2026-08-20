@@ -166,7 +166,9 @@ export default function DashboardPage() {
               </Card>
             ) : (
               <div>
-                <h2 className="text-xl font-semibold mb-4">Twoje wesela</h2>
+                <h2 className="text-3xl font-serif font-semibold mb-4">
+                  Twoje wesela
+                </h2>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {events.map((event) => {
                     const draft = event.event_drafts?.[0];

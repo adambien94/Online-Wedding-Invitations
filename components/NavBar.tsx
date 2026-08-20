@@ -8,7 +8,7 @@ export default function NavBar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-end h-16">
           <div className="flex items-center">
-            {/* <Link href="/" className="text-3xl font-serif text-rose-900">
+            {/* <Link href="/" className="text-4xl font-serif text-rose-900">
               Weseleo
             </Link> */}
           </div>
@@ -35,7 +35,7 @@ export default function NavBar() {
             </div> */}
             <Link
               href="/"
-              className="text-3xl font-semibold font-serif text-neutral-900"
+              className="text-4xl font-semibold font-serif text-neutral-900"
             >
               Weseleo
             </Link>

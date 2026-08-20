@@ -30,7 +30,7 @@ export default function Hero() {
               <Button
                 variant="outline"
                 size="lg"
-                className="px-6 w-full lg:w-auto"
+                className="px-6 w-full lg:w-auto bg-white"
               >
                 Zobacz możliwości
               </Button>

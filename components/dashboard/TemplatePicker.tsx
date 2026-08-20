@@ -35,14 +35,16 @@ export default function TemplatePicker({
 
               <div className="p-5 flex flex-col gap-3 flex-1 border-t">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-semibold text-gray-900">{tmpl.name}</h2>
+                  <h2 className="font-serif text-2xl font-semibold text-gray-900">
+                    {tmpl.name}
+                  </h2>
                   {isActive && (
                     <span className="text-xs text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">
                       Aktywny
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-gray-500 flex-1 pb-2">
+                <p className="text-sm text-muted-foreground flex-1 pb-2">
                   {tmpl.description}
                 </p>
                 <Button

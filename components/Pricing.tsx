@@ -53,7 +53,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-16 border-t border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-center font-serif font-base">
+        <h2 className="text-4xl text-center font-serif font-base">
           Wybierzcie pojemność Waszej galerii.
         </h2>
         <p className="mt-2 text-center text-muted-foreground">
@@ -62,13 +62,13 @@ export default function Pricing() {
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           {plans.map((p) => (
-            <Card key={p.title} className="">
+            <Card key={p.title} className="text-neutral-900">
               <CardHeader>
                 <CardTitle>{p.title}</CardTitle>
-                <CardDescription className="text-3xl text-neutral-600 font-bold">
+                <CardDescription className="text-4xl text-neutral-500 font-bold">
                   {p.price}
                 </CardDescription>
-                <p className="text-muted-foreground font-bold text-xs">
+                <p className="text-neutral-500 font-bold text-xs">
                   Do 200 zdjęć lub filmów
                 </p>
               </CardHeader>

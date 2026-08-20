@@ -89,9 +89,9 @@ export default function EditEventPage() {
   const [publishing, setPublishing] = useState(false);
   const [publishSuccess, setPublishSuccess] = useState(false);
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("motyw");
-  const [expandedSections, setExpandedSections] = useState<
-    Partial<Record<SectionId, boolean>>
-  >({ couple: true });
+  const [expandedSection, setExpandedSection] = useState<SectionId | null>(
+    "couple",
+  );
 
   const isFirstLoad = useRef(true);
   const tabInitialized = useRef(false);
@@ -307,7 +307,7 @@ export default function EditEventPage() {
   };
 
   const toggleExpanded = (id: SectionId) => {
-    setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
+    setExpandedSection((prev) => (prev === id ? null : id));
   };
 
   const toggleSectionVisibility = (
@@ -419,7 +419,7 @@ export default function EditEventPage() {
           <div className="max-w-[1440px] w-full mx-auto px-4 pt-8 pb-0 sm:px-6 lg:px-8">
             <div className="flex justify-between items-start mb-6">
               <div>
-                <h1 className="text-4xl font-bold font-serif mb-2">
+                <h1 className="text-4xl font-bold font-serif mb-2 text-neutral-900">
                   Strona ślubna
                 </h1>
                 {/* <p className="text-sm text-muted-foreground">
@@ -494,9 +494,9 @@ export default function EditEventPage() {
         >
           {/* Form column */}
           <div className="w-1/4 min-w-128 overflow-y-auto scrollbar-none">
-            <div className="p-8 mx-auto space-y-4">
+            <div className="p-8 mx-auto space-y-2">
               <div className="mb-8">
-                <h2 className="font-serif text-2xl font-semibold text-neutral-900">
+                <h2 className="font-serif text-3xl font-semibold text-neutral-900">
                   Sekcje strony
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -508,7 +508,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="Para"
                 icon={Users}
-                open={Boolean(expandedSections.couple)}
+                open={expandedSection === "couple"}
                 onOpenChange={() => toggleExpanded("couple")}
               >
                 <div className="space-y-5">
@@ -540,7 +540,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="Data"
                 icon={CalendarDays}
-                open={Boolean(expandedSections.event)}
+                open={expandedSection === "event"}
                 onOpenChange={() => toggleExpanded("event")}
               >
                 <div className="space-y-5">
@@ -572,7 +572,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="Nagłówek"
                 icon={ImageIcon}
-                open={Boolean(expandedSections.hero)}
+                open={expandedSection === "hero"}
                 onOpenChange={() => toggleExpanded("hero")}
                 visible={config.sections.hero}
                 onVisibleChange={(visible) =>
@@ -608,7 +608,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="Lokalizacje"
                 icon={MapPin}
-                open={Boolean(expandedSections.locations)}
+                open={expandedSection === "locations"}
                 onOpenChange={() => toggleExpanded("locations")}
                 visible={config.sections.locations}
                 onVisibleChange={(visible) =>
@@ -676,7 +676,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="Harmonogram"
                 icon={Clock3}
-                open={Boolean(expandedSections.schedule)}
+                open={expandedSection === "schedule"}
                 onOpenChange={() => toggleExpanded("schedule")}
                 visible={config.sections.schedule}
                 onVisibleChange={(visible) =>
@@ -727,7 +727,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="FAQ"
                 icon={CircleHelp}
-                open={Boolean(expandedSections.faq)}
+                open={expandedSection === "faq"}
                 onOpenChange={() => toggleExpanded("faq")}
                 visible={config.sections.faq}
                 onVisibleChange={(visible) =>
@@ -782,7 +782,7 @@ export default function EditEventPage() {
               <SectionEditorCard
                 title="RSVP"
                 icon={Heart}
-                open={Boolean(expandedSections.rsvp)}
+                open={expandedSection === "rsvp"}
                 onOpenChange={() => toggleExpanded("rsvp")}
                 visible={config.sections.rsvp}
                 onVisibleChange={(visible) =>
@@ -898,14 +898,19 @@ export default function EditEventPage() {
           )}
           aria-hidden={activeTab !== "publikacja"}
         >
-          <main className="max-w-lg mx-auto px-4 py-16 sm:px-6 text-center">
-            <h2 className="text-2xl font-serif font-semibold mb-2">
+          <main className="max-w-lg h-3/4 mx-auto px-4 sm:px-6 text-center flex flex-col justify-center items-center">
+            <h2 className="text-4xl font-serif font-semibold mb-4">
               Publikacja
             </h2>
             <p className="text-sm text-muted-foreground mb-8">
               Opublikuj stronę, aby była dostępna pod Twoją subdomeną.
             </p>
-            <Button size="lg" disabled={publishing} onClick={handlePublish}>
+            <Button
+              size="lg"
+              className="w-32"
+              disabled={publishing}
+              onClick={handlePublish}
+            >
               {publishing ? "Publikowanie…" : "Publikuj"}
             </Button>
             {publishSuccess && (

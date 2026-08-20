@@ -33,7 +33,7 @@ export default function Steps() {
   return (
     <section className=" border-t border-gray-100 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-center font-serif font-base text-gray-900">
+        <h2 className="text-4xl text-center font-serif font-base text-gray-900">
           Wy przygotowujecie stronę. Goście wypełniają ją wspomnieniami.
         </h2>
         <p className="mt-2 text-center text-muted-foreground">

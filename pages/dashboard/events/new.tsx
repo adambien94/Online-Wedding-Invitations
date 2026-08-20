@@ -138,7 +138,7 @@ export default function NewEventPage() {
             ← Dashboard
           </button>
 
-          <h1 className="text-3xl font-bold font-serif mb-2">Utwórz wesele</h1>
+          <h1 className="text-4xl font-bold font-serif mb-2">Utwórz wesele</h1>
 
           {reservation && (
             <p className="text-sm text-gray-500 mb-8">

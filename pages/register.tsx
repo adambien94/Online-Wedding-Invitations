@@ -195,7 +195,7 @@ export default function RegisterPage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-start h-16">
               <div className="flex items-center">
-                <Link href="/" className="text-3xl font-serif text-neutral-900">
+                <Link href="/" className="text-4xl font-serif text-neutral-900">
                   Weseleo
                 </Link>
               </div>
