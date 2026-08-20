@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Card,
+  CardAction,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import {
   Field,
@@ -113,7 +116,10 @@ export default function EditEventPage() {
     const fromQuery = parseTab(router.query.tab);
     if (
       fromQuery &&
-      !((fromQuery === "sekcje" || fromQuery === "publikacja") && !config.template?.key)
+      !(
+        (fromQuery === "sekcje" || fromQuery === "publikacja") &&
+        !config.template?.key
+      )
     ) {
       setActiveTab(fromQuery);
       return;
@@ -472,456 +478,449 @@ export default function EditEventPage() {
           )}
           aria-hidden={activeTab !== "sekcje"}
         >
-            {/* Form column */}
-            <div className="w-1/2 overflow-y-auto scrollbar-none">
-              <div className="px-6 py-8 max-w-[690px] mx-auto">
-                {saveStatus !== "idle" && (
-                  <p className="text-xs text-muted-foreground mb-3">
-                    {saveStatus === "saving" && "Zapisywanie…"}
-                    {saveStatus === "saved" && "Zapisano"}
-                    {saveStatus === "error" && "Błąd zapisu"}
-                  </p>
-                )}
-                <Card>
-                  <CardContent>
-                    <FieldGroup>
-                      <FieldSet>
-                        <FieldLegend className="font-serif !text-2xl text-semibold">
-                          Para
-                        </FieldLegend>
-                        <Field>
-                          <FieldLabel htmlFor="couple-person1">
-                            Imię pierwszej osoby
-                          </FieldLabel>
-                          <Input
-                            id="couple-person1"
-                            value={config.couple.person1}
-                            onChange={(e) =>
-                              updateNested("couple", "person1", e.target.value)
-                            }
-                            placeholder="np. Anna"
-                          />
-                        </Field>
-                        <Field>
-                          <FieldLabel htmlFor="couple-person2">
-                            Imię drugiej osoby
-                          </FieldLabel>
-                          <Input
-                            id="couple-person2"
-                            value={config.couple.person2}
-                            onChange={(e) =>
-                              updateNested("couple", "person2", e.target.value)
-                            }
-                            placeholder="np. Marek"
-                          />
-                        </Field>
-                      </FieldSet>
+          {/* Form column */}
+          <div className="w-1/2 overflow-y-auto scrollbar-none">
+            <div className="px-6 py-8  mx-auto">
+              {/* {saveStatus !== "idle" && (
+                <p className="text-xs text-muted-foreground mb-3">
+                  {saveStatus === "saving" && "Zapisywanie…"}
+                  {saveStatus === "saved" && "Zapisano"}
+                  {saveStatus === "error" && "Błąd zapisu"}
+                </p>
+              )} */}
+              <Card>
+                <CardContent>
+                  <FieldGroup>
+                    <FieldSet>
+                      <FieldLegend className="font-serif !text-2xl text-semibold">
+                        Para
+                      </FieldLegend>
+                      <Field>
+                        <FieldLabel htmlFor="couple-person1">
+                          Imię pierwszej osoby
+                        </FieldLabel>
+                        <Input
+                          id="couple-person1"
+                          value={config.couple.person1}
+                          onChange={(e) =>
+                            updateNested("couple", "person1", e.target.value)
+                          }
+                          placeholder="np. Anna"
+                        />
+                      </Field>
+                      <Field>
+                        <FieldLabel htmlFor="couple-person2">
+                          Imię drugiej osoby
+                        </FieldLabel>
+                        <Input
+                          id="couple-person2"
+                          value={config.couple.person2}
+                          onChange={(e) =>
+                            updateNested("couple", "person2", e.target.value)
+                          }
+                          placeholder="np. Marek"
+                        />
+                      </Field>
+                    </FieldSet>
 
-                      <FieldSeparator />
+                    <FieldSeparator />
 
+                    <FieldSet>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Data
+                      </FieldLegend>
+                      <Field>
+                        <FieldLabel htmlFor="event-date">
+                          Data wesela
+                        </FieldLabel>
+                        <Input
+                          id="event-date"
+                          type="date"
+                          value={config.event.date}
+                          onChange={(e) =>
+                            updateNested("event", "date", e.target.value)
+                          }
+                        />
+                      </Field>
+                      <Field>
+                        <FieldLabel htmlFor="event-time">
+                          Godzina (opcjonalnie)
+                        </FieldLabel>
+                        <Input
+                          id="event-time"
+                          type="time"
+                          value={config.event.time}
+                          onChange={(e) =>
+                            updateNested("event", "time", e.target.value)
+                          }
+                        />
+                      </Field>
+                    </FieldSet>
+
+                    <FieldSeparator />
+
+                    <FieldSet>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Hero
+                      </FieldLegend>
+                      <Field>
+                        <FieldLabel htmlFor="hero-title">Tytuł</FieldLabel>
+                        <Input
+                          id="hero-title"
+                          value={config.hero.title}
+                          onChange={(e) =>
+                            updateNested("hero", "title", e.target.value)
+                          }
+                          placeholder="np. Pobieramy się!"
+                        />
+                      </Field>
+                      <Field>
+                        <FieldLabel htmlFor="hero-subtitle">
+                          Podtytuł
+                        </FieldLabel>
+                        <Input
+                          id="hero-subtitle"
+                          value={config.hero.subtitle}
+                          onChange={(e) =>
+                            updateNested("hero", "subtitle", e.target.value)
+                          }
+                          placeholder="np. Będzie nam miło świętować razem z Wami"
+                        />
+                      </Field>
+                    </FieldSet>
+
+                    <FieldSeparator />
+
+                    <FieldSet>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Ceremonia
+                      </FieldLegend>
+                      <Field>
+                        <FieldLabel htmlFor="ceremony-name">
+                          Nazwa miejsca
+                        </FieldLabel>
+                        <Input
+                          id="ceremony-name"
+                          value={config.ceremony.name}
+                          onChange={(e) =>
+                            updateNested("ceremony", "name", e.target.value)
+                          }
+                          placeholder="np. Kościół Wniebowzięcia NMP"
+                        />
+                      </Field>
+                      <Field>
+                        <FieldLabel htmlFor="ceremony-address">
+                          Adres
+                        </FieldLabel>
+                        <Input
+                          id="ceremony-address"
+                          value={config.ceremony.address}
+                          onChange={(e) =>
+                            updateNested("ceremony", "address", e.target.value)
+                          }
+                          placeholder="np. ul. Kościelna 1, Kraków"
+                        />
+                      </Field>
+                    </FieldSet>
+
+                    <FieldSeparator />
+
+                    <FieldSet>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Przyjęcie
+                      </FieldLegend>
+                      <Field>
+                        <FieldLabel htmlFor="reception-name">
+                          Nazwa sali
+                        </FieldLabel>
+                        <Input
+                          id="reception-name"
+                          value={config.reception.name}
+                          onChange={(e) =>
+                            updateNested("reception", "name", e.target.value)
+                          }
+                          placeholder="np. Sala Weselna Róża"
+                        />
+                      </Field>
+                      <Field>
+                        <FieldLabel htmlFor="reception-address">
+                          Adres
+                        </FieldLabel>
+                        <Input
+                          id="reception-address"
+                          value={config.reception.address}
+                          onChange={(e) =>
+                            updateNested("reception", "address", e.target.value)
+                          }
+                          placeholder="np. ul. Parkowa 5, Kraków"
+                        />
+                      </Field>
+                    </FieldSet>
+
+                    <FieldSeparator />
+
+                    {config.sections.schedule && (
                       <FieldSet>
                         <FieldLegend className="font-serif !text-2xl font-semibold">
-                          Data
+                          Harmonogram
                         </FieldLegend>
-                        <Field>
-                          <FieldLabel htmlFor="event-date">
-                            Data wesela
-                          </FieldLabel>
-                          <Input
-                            id="event-date"
-                            type="date"
-                            value={config.event.date}
-                            onChange={(e) =>
-                              updateNested("event", "date", e.target.value)
-                            }
-                          />
-                        </Field>
-                        <Field>
-                          <FieldLabel htmlFor="event-time">
-                            Godzina (opcjonalnie)
-                          </FieldLabel>
-                          <Input
-                            id="event-time"
-                            type="time"
-                            value={config.event.time}
-                            onChange={(e) =>
-                              updateNested("event", "time", e.target.value)
-                            }
-                          />
-                        </Field>
+                        <div className="space-y-3">
+                          {config.schedule.map((item, i) => (
+                            <div key={i} className="flex gap-2 items-start">
+                              <Input
+                                className="w-24 shrink-0"
+                                value={item.time}
+                                onChange={(e) =>
+                                  updateScheduleItem(i, "time", e.target.value)
+                                }
+                                placeholder="15:00"
+                                aria-label={`Godzina pozycji ${i + 1}`}
+                              />
+                              <Input
+                                value={item.label}
+                                onChange={(e) =>
+                                  updateScheduleItem(i, "label", e.target.value)
+                                }
+                                placeholder="Ceremonia"
+                                aria-label={`Opis pozycji ${i + 1}`}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => removeScheduleItem(i)}
+                                className="mt-2 text-gray-400 hover:text-red-500 text-lg leading-none shrink-0"
+                                aria-label="Usuń pozycję harmonogramu"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          ))}
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={addScheduleItem}
+                          >
+                            + Dodaj pozycję
+                          </Button>
+                        </div>
                       </FieldSet>
+                    )}
 
-                      <FieldSeparator />
+                    {config.sections.schedule && <FieldSeparator />}
 
+                    {config.sections.faq && (
                       <FieldSet>
                         <FieldLegend className="font-serif !text-2xl font-semibold">
-                          Hero
+                          FAQ
                         </FieldLegend>
-                        <Field>
-                          <FieldLabel htmlFor="hero-title">Tytuł</FieldLabel>
-                          <Input
-                            id="hero-title"
-                            value={config.hero.title}
-                            onChange={(e) =>
-                              updateNested("hero", "title", e.target.value)
-                            }
-                            placeholder="np. Pobieramy się!"
-                          />
-                        </Field>
-                        <Field>
-                          <FieldLabel htmlFor="hero-subtitle">
-                            Podtytuł
-                          </FieldLabel>
-                          <Input
-                            id="hero-subtitle"
-                            value={config.hero.subtitle}
-                            onChange={(e) =>
-                              updateNested("hero", "subtitle", e.target.value)
-                            }
-                            placeholder="np. Będzie nam miło świętować razem z Wami"
-                          />
-                        </Field>
-                      </FieldSet>
-
-                      <FieldSeparator />
-
-                      <FieldSet>
-                        <FieldLegend className="font-serif !text-2xl font-semibold">
-                          Ceremonia
-                        </FieldLegend>
-                        <Field>
-                          <FieldLabel htmlFor="ceremony-name">
-                            Nazwa miejsca
-                          </FieldLabel>
-                          <Input
-                            id="ceremony-name"
-                            value={config.ceremony.name}
-                            onChange={(e) =>
-                              updateNested("ceremony", "name", e.target.value)
-                            }
-                            placeholder="np. Kościół Wniebowzięcia NMP"
-                          />
-                        </Field>
-                        <Field>
-                          <FieldLabel htmlFor="ceremony-address">
-                            Adres
-                          </FieldLabel>
-                          <Input
-                            id="ceremony-address"
-                            value={config.ceremony.address}
-                            onChange={(e) =>
-                              updateNested(
-                                "ceremony",
-                                "address",
-                                e.target.value,
-                              )
-                            }
-                            placeholder="np. ul. Kościelna 1, Kraków"
-                          />
-                        </Field>
-                      </FieldSet>
-
-                      <FieldSeparator />
-
-                      <FieldSet>
-                        <FieldLegend className="font-serif !text-2xl font-semibold">
-                          Przyjęcie
-                        </FieldLegend>
-                        <Field>
-                          <FieldLabel htmlFor="reception-name">
-                            Nazwa sali
-                          </FieldLabel>
-                          <Input
-                            id="reception-name"
-                            value={config.reception.name}
-                            onChange={(e) =>
-                              updateNested("reception", "name", e.target.value)
-                            }
-                            placeholder="np. Sala Weselna Róża"
-                          />
-                        </Field>
-                        <Field>
-                          <FieldLabel htmlFor="reception-address">
-                            Adres
-                          </FieldLabel>
-                          <Input
-                            id="reception-address"
-                            value={config.reception.address}
-                            onChange={(e) =>
-                              updateNested(
-                                "reception",
-                                "address",
-                                e.target.value,
-                              )
-                            }
-                            placeholder="np. ul. Parkowa 5, Kraków"
-                          />
-                        </Field>
-                      </FieldSet>
-
-                      <FieldSeparator />
-
-                      {config.sections.schedule && (
-                        <FieldSet>
-                          <FieldLegend className="font-serif !text-2xl font-semibold">
-                            Harmonogram
-                          </FieldLegend>
-                          <div className="space-y-3">
-                            {config.schedule.map((item, i) => (
-                              <div key={i} className="flex gap-2 items-start">
-                                <Input
-                                  className="w-24 shrink-0"
-                                  value={item.time}
-                                  onChange={(e) =>
-                                    updateScheduleItem(
-                                      i,
-                                      "time",
-                                      e.target.value,
-                                    )
-                                  }
-                                  placeholder="15:00"
-                                  aria-label={`Godzina pozycji ${i + 1}`}
-                                />
-                                <Input
-                                  value={item.label}
-                                  onChange={(e) =>
-                                    updateScheduleItem(
-                                      i,
-                                      "label",
-                                      e.target.value,
-                                    )
-                                  }
-                                  placeholder="Ceremonia"
-                                  aria-label={`Opis pozycji ${i + 1}`}
-                                />
+                        <div className="space-y-4">
+                          {config.faq.map((item, i) => (
+                            <div
+                              key={i}
+                              className="space-y-2 rounded-2xl border p-3"
+                            >
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-muted-foreground font-medium">
+                                  #{i + 1}
+                                </span>
                                 <button
                                   type="button"
-                                  onClick={() => removeScheduleItem(i)}
-                                  className="mt-2 text-gray-400 hover:text-red-500 text-lg leading-none shrink-0"
-                                  aria-label="Usuń pozycję harmonogramu"
+                                  onClick={() => removeFaqItem(i)}
+                                  className="text-gray-400 hover:text-red-500 text-lg leading-none"
+                                  aria-label="Usuń pytanie FAQ"
                                 >
                                   ×
                                 </button>
                               </div>
-                            ))}
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={addScheduleItem}
-                            >
-                              + Dodaj pozycję
-                            </Button>
-                          </div>
-                        </FieldSet>
-                      )}
-
-                      {config.sections.schedule && <FieldSeparator />}
-
-                      {config.sections.faq && (
-                        <FieldSet>
-                          <FieldLegend className="font-serif !text-2xl font-semibold">
-                            FAQ
-                          </FieldLegend>
-                          <div className="space-y-4">
-                            {config.faq.map((item, i) => (
-                              <div
-                                key={i}
-                                className="space-y-2 rounded-2xl border p-3"
-                              >
-                                <div className="flex justify-between items-center">
-                                  <span className="text-xs text-muted-foreground font-medium">
-                                    #{i + 1}
-                                  </span>
-                                  <button
-                                    type="button"
-                                    onClick={() => removeFaqItem(i)}
-                                    className="text-gray-400 hover:text-red-500 text-lg leading-none"
-                                    aria-label="Usuń pytanie FAQ"
-                                  >
-                                    ×
-                                  </button>
-                                </div>
-                                <Input
-                                  value={item.question}
-                                  onChange={(e) =>
-                                    updateFaqItem(i, "question", e.target.value)
-                                  }
-                                  placeholder="Pytanie"
-                                  aria-label={`Pytanie ${i + 1}`}
-                                />
-                                <Input
-                                  value={item.answer}
-                                  onChange={(e) =>
-                                    updateFaqItem(i, "answer", e.target.value)
-                                  }
-                                  placeholder="Odpowiedź"
-                                  aria-label={`Odpowiedź ${i + 1}`}
-                                />
-                              </div>
-                            ))}
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={addFaqItem}
-                            >
-                              + Dodaj pytanie
-                            </Button>
-                          </div>
-                        </FieldSet>
-                      )}
-
-                      {config.sections.faq && <FieldSeparator />}
-
-                      <FieldSet>
-                        <FieldLegend className="font-serif !text-2xl font-semibold">
-                          Widoczność sekcji
-                        </FieldLegend>
-                        <FieldDescription>
-                          Zdecyduj, które sekcje mają pojawić się w zaproszeniu.
-                        </FieldDescription>
-                        <div className="space-y-3">
-                          {(
-                            [
-                              { key: "hero", label: "Hero" },
-                              {
-                                key: "locations",
-                                label: "Lokalizacje (ceremonia i przyjęcie)",
-                              },
-                              { key: "schedule", label: "Harmonogram" },
-                              { key: "rsvp", label: "RSVP" },
-                              { key: "faq", label: "FAQ" },
-                            ] as {
-                              key: keyof InvitationConfig["sections"];
-                              label: string;
-                            }[]
-                          ).map(({ key, label }) => (
-                            <label
-                              key={key}
-                              className="flex items-center justify-between gap-4 cursor-pointer"
-                            >
-                              <span
-                                className={`text-sm ${config.sections[key] ? "text-neutral-900" : "text-muted-foreground"}`}
-                              >
-                                {label}
-                              </span>
-                              <button
-                                type="button"
-                                role="switch"
-                                aria-checked={config.sections[key]}
-                                onClick={() =>
-                                  update("sections", {
-                                    ...config.sections,
-                                    [key]: !config.sections[key],
-                                  })
+                              <Input
+                                value={item.question}
+                                onChange={(e) =>
+                                  updateFaqItem(i, "question", e.target.value)
                                 }
-                                className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 ${
-                                  config.sections[key]
-                                    ? "bg-neutral-900"
-                                    : "bg-gray-200"
-                                }`}
-                              >
-                                <span
-                                  className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow-sm transform transition-transform ${
-                                    config.sections[key]
-                                      ? "translate-x-4"
-                                      : "translate-x-0"
-                                  }`}
-                                />
-                              </button>
-                            </label>
+                                placeholder="Pytanie"
+                                aria-label={`Pytanie ${i + 1}`}
+                              />
+                              <Input
+                                value={item.answer}
+                                onChange={(e) =>
+                                  updateFaqItem(i, "answer", e.target.value)
+                                }
+                                placeholder="Odpowiedź"
+                                aria-label={`Odpowiedź ${i + 1}`}
+                              />
+                            </div>
                           ))}
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={addFaqItem}
+                          >
+                            + Dodaj pytanie
+                          </Button>
                         </div>
                       </FieldSet>
-                    </FieldGroup>
-                  </CardContent>
+                    )}
 
-                  <CardFooter className="border-t flex items-center justify-between gap-4">
-                    <div>
+                    {config.sections.faq && <FieldSeparator />}
+
+                    <FieldSet>
                       <FieldLegend className="font-serif !text-2xl font-semibold">
-                        Szablon
+                        Widoczność sekcji
                       </FieldLegend>
-                      <p className="text-sm font-medium">
-                        {config.template?.key === "modern"
-                          ? "Nowoczesny"
-                          : "Klasyczny"}
-                      </p>
                       <FieldDescription>
-                        Zmień wygląd zaproszenia bez utraty danych
+                        Zdecyduj, które sekcje mają pojawić się w zaproszeniu.
                       </FieldDescription>
-                    </div>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setTab("motyw")}
-                    >
-                      Zmień szablon
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </div>
-            </div>
+                      <div className="space-y-3">
+                        {(
+                          [
+                            { key: "hero", label: "Hero" },
+                            {
+                              key: "locations",
+                              label: "Lokalizacje (ceremonia i przyjęcie)",
+                            },
+                            { key: "schedule", label: "Harmonogram" },
+                            { key: "rsvp", label: "RSVP" },
+                            { key: "faq", label: "FAQ" },
+                          ] as {
+                            key: keyof InvitationConfig["sections"];
+                            label: string;
+                          }[]
+                        ).map(({ key, label }) => (
+                          <label
+                            key={key}
+                            className="flex items-center justify-between gap-4 cursor-pointer"
+                          >
+                            <span
+                              className={`text-sm ${config.sections[key] ? "text-neutral-900" : "text-muted-foreground"}`}
+                            >
+                              {label}
+                            </span>
+                            <button
+                              type="button"
+                              role="switch"
+                              aria-checked={config.sections[key]}
+                              onClick={() =>
+                                update("sections", {
+                                  ...config.sections,
+                                  [key]: !config.sections[key],
+                                })
+                              }
+                              className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 ${
+                                config.sections[key]
+                                  ? "bg-neutral-900"
+                                  : "bg-gray-200"
+                              }`}
+                            >
+                              <span
+                                className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow-sm transform transition-transform ${
+                                  config.sections[key]
+                                    ? "translate-x-4"
+                                    : "translate-x-0"
+                                }`}
+                              />
+                            </button>
+                          </label>
+                        ))}
+                      </div>
+                    </FieldSet>
+                  </FieldGroup>
+                </CardContent>
 
-            {/* Live preview column */}
-            <div className="relative w-1/2 flex flex-col min-h-0 bg-neutral-800 shadow-xl border-l">
-              <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-2 pointer-events-none">
-                <p className="text-xs tracking-wide text-neutral-700 pointer-events-auto"></p>
-                <div className="flex items-center gap-0.5 rounded-lg p-0.5 pointer-events-auto">
-                  <button
-                    type="button"
-                    onClick={() => setPreviewMode("desktop")}
-                    aria-label="Podgląd desktop"
-                    aria-pressed={previewMode === "desktop"}
-                    className={cn(
-                      "rounded-md p-1.5 transition-all",
-                      previewMode === "desktop"
-                        ? "bg-white text-neutral-900 shadow-md"
-                        : "text-neutral-500 hover:text-neutral-700",
-                    )}
-                  >
-                    <Monitor className="size-5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPreviewMode("mobile")}
-                    aria-label="Podgląd mobile"
-                    aria-pressed={previewMode === "mobile"}
-                    className={cn(
-                      "rounded-md p-1.5 transition-all",
-                      previewMode === "mobile"
-                        ? "bg-white text-neutral-900 shadow-md"
-                        : "text-neutral-500 hover:text-neutral-700",
-                    )}
-                  >
-                    <Smartphone className="size-5" />
-                  </button>
-                </div>
-              </div>
-              <div
-                className={cn(
-                  "flex-1 min-h-0",
-                  previewMode === "mobile"
-                    ? "flex flex-col items-center py-12 px-4"
-                    : "overflow-y-auto",
-                )}
-              >
-                {previewMode === "mobile" ? (
-                  <div className="w-[390px] max-h-[890px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-600 bg-white shadow-lg">
-                    <InvitationRenderer
-                      templateKey={templateKey}
-                      config={config}
-                    />
+                <CardFooter className="border-t flex items-center justify-between gap-4">
+                  <div>
+                    <FieldLegend className="font-serif !text-2xl font-semibold">
+                      Szablon
+                    </FieldLegend>
+                    <p className="text-sm font-medium">
+                      {config.template?.key === "modern"
+                        ? "Nowoczesny"
+                        : "Klasyczny"}
+                    </p>
+                    <FieldDescription>
+                      Zmień wygląd zaproszenia bez utraty danych
+                    </FieldDescription>
                   </div>
-                ) : (
-                  <InvitationRenderer
-                    templateKey={templateKey}
-                    config={config}
-                  />
-                )}
-              </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setTab("motyw")}
+                  >
+                    Zmień szablon
+                  </Button>
+                </CardFooter>
+              </Card>
             </div>
+          </div>
+
+          {/* Live preview column */}
+          <div className="w-1/2 flex flex-col min-h-0 p-8 pl-2">
+            <Card className="flex-1 min-h-0 gap-4 py-4">
+              <div className="flex justify-between items-center px-6">
+                <CardTitle className="text-sm text-muted-foreground">
+                  Podgląd na żywo
+                </CardTitle>
+                <CardAction>
+                  <div className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewMode("desktop")}
+                      aria-label="Podgląd desktop"
+                      aria-pressed={previewMode === "desktop"}
+                      className={cn(
+                        "rounded-md p-1.5 transition-all",
+                        previewMode === "desktop"
+                          ? "bg-background text-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      <Monitor className="size-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPreviewMode("mobile")}
+                      aria-label="Podgląd mobile"
+                      aria-pressed={previewMode === "mobile"}
+                      className={cn(
+                        "rounded-md p-1.5 transition-all",
+                        previewMode === "mobile"
+                          ? "bg-background text-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      <Smartphone className="size-4" />
+                    </button>
+                  </div>
+                </CardAction>
+              </div>
+              <CardContent className="flex-1 min-h-0 flex flex-col">
+                <div
+                  className={cn(
+                    "flex-1 min-h-0 overflow-hidden rounded-2xl border border-border bg-background",
+                    previewMode === "mobile" &&
+                      "flex flex-col items-center justify-center bg-muted/40 p-6",
+                  )}
+                >
+                  {previewMode === "mobile" ? (
+                    <div className="w-[390px] max-h-full flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-300 bg-white shadow-md">
+                      <InvitationRenderer
+                        templateKey={templateKey}
+                        config={config}
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-full overflow-y-auto scrollbar-none">
+                      <InvitationRenderer
+                        templateKey={templateKey}
+                        config={config}
+                      />
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         <div
