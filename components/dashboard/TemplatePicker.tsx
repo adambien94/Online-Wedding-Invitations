@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { templateRegistry } from "@/features/templates/registry";
 import type { InvitationConfig } from "@/lib/invitation-config";
+import { Check } from "lucide-react";
 
 interface TemplatePickerProps {
   config: InvitationConfig;
@@ -16,8 +17,8 @@ export default function TemplatePicker({
   const currentKey = config.template?.key ?? "";
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8 sm:px-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <main className="max-w-[1440px] mx-auto px-4 py-8 sm:px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
         {templateRegistry.map((tmpl) => {
           const isActive = currentKey === tmpl.key;
           const isSaving = savingKey === tmpl.key;
@@ -25,7 +26,7 @@ export default function TemplatePicker({
           return (
             <div
               key={tmpl.key}
-              className={`bg-white shadow-md rounded-xl border overflow-hidden flex flex-col transition-all ${
+              className={`bg-white shadow-md rounded-4xl border overflow-hidden flex flex-col transition-all ${
                 isActive ? "" : "hover:shadow-lg"
               }`}
             >
@@ -38,11 +39,6 @@ export default function TemplatePicker({
                   <h2 className="font-serif text-2xl font-semibold text-gray-900">
                     {tmpl.name}
                   </h2>
-                  {isActive && (
-                    <span className="text-xs text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">
-                      Aktywny
-                    </span>
-                  )}
                 </div>
                 <p className="text-sm text-muted-foreground flex-1 pb-2">
                   {tmpl.description}
@@ -56,6 +52,14 @@ export default function TemplatePicker({
                 >
                   {isSaving ? "Zapisywanie…" : isActive ? "Wybrany" : "Wybierz"}
                 </Button>
+                {isActive && (
+                  <div className="flex justify-end">
+                    <span className="inline-flex items-center gap-1 text-xs border border-neutral-300 text-neutral-500 font-medium bg-neutral-50 px-3 py-1 rounded-full">
+                      <Check className="size-3.5" />
+                      Aktywny
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           );

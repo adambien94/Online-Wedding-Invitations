@@ -448,7 +448,7 @@ export default function EditEventPage() {
                     disabled={locked}
                     onClick={() => !locked && setTab(tabId)}
                     className={cn(
-                      "flex items-center gap-2 pb-3 text-sm font-medium border-b-2 transition-colors",
+                      "flex items-center gap-2 pb-3 text-sm font-medium border-b-2 transition-colors pr-1",
                       isActive
                         ? "border-neutral-900 text-neutral-900"
                         : "border-transparent text-muted-foreground hover:text-neutral-700",
@@ -823,9 +823,9 @@ export default function EditEventPage() {
 
           {/* Live preview column */}
           <div className="w-3/4 flex flex-col min-h-0 p-8 pl-2">
-            <Card className="flex-1 min-h-0 gap-4 py-4">
+            <Card className="flex-1 min-h-0 gap-3 py-4">
               <div className="flex justify-between items-center px-6">
-                <CardTitle className="flex items-center gap-1.5 text-xs">
+                <CardTitle className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <Eye className="size-4" />
                   Podgląd na żywo
                 </CardTitle>

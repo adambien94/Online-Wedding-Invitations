@@ -34,13 +34,13 @@ export default function Features() {
     <section id="features" className="pb-2">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-16">
         <div className="lg:w-1/4">
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-6">
             {items.map((it) => {
               const Icon = it.icon;
               return (
                 <Card key={it.title}>
                   <CardHeader className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
+                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl border text-neutral-600">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
@@ -79,7 +79,9 @@ export default function Features() {
                       <Icon className="h-5 w-5" />
                     </div> */}
                     <div>
-                      <h2 className="font-base font-medium">{it.title}</h2>
+                      <h2 className="text-2xl font-serif font-medium">
+                        {it.title}
+                      </h2>
                       <p className="text-muted-foreground text-sm">{it.desc}</p>
                     </div>
                   </div>

@@ -2,6 +2,8 @@ import type { ComponentType } from "react";
 import type { InvitationConfig } from "@/lib/invitation-config";
 import { classicMetadata } from "./classic/metadata";
 import { modernMetadata } from "./modern/metadata";
+import { gardenMetadata } from "./garden/metadata";
+import { romanticMetadata } from "./romantic/metadata";
 
 export interface TemplateEntry {
   key: string;
@@ -18,8 +20,12 @@ export interface TemplateEntry {
 
 import ClassicTemplate from "./classic/Template";
 import ModernTemplate from "./modern/Template";
+import GardenTemplate from "./garden/Template";
+import RomanticTemplate from "./romantic/Template";
 
 export const templateRegistry: TemplateEntry[] = [
+  { ...gardenMetadata, component: GardenTemplate },
+  { ...romanticMetadata, component: RomanticTemplate },
   { ...classicMetadata, component: ClassicTemplate },
   { ...modernMetadata, component: ModernTemplate },
 ];

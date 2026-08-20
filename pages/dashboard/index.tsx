@@ -119,7 +119,7 @@ export default function DashboardPage() {
           <div className="flex justify-between items-start mb-8">
             <div>
               <h1 className="text-4xl font-bold font-serif mb-2">Dashboard</h1>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 Zalogowany jako: <strong>{user?.email}</strong>
               </p>
             </div>

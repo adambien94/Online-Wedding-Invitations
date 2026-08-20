@@ -45,7 +45,7 @@ export default function Steps() {
             return (
               <Card key={s.title}>
                 <CardHeader className="flex flex-col items-center gap-4 text-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border text-neutral-600">
                     <Icon className="h-6 w-6" />
                   </div>
                   <div>
