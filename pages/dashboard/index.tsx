@@ -2,12 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardTitle,
-} from "@/components/ui/card";
-import NavBar from "@/components/NavBar";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Spinner from "@/components/ui/Spinner";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
@@ -120,8 +115,6 @@ export default function DashboardPage() {
       </Head>
 
       <div className="min-h-screen bg-gray-50">
-        <NavBar />
-
         <main className="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex justify-between items-start mb-8">
             <div>
@@ -183,51 +176,51 @@ export default function DashboardPage() {
                         ? `${couple.person1} & ${couple.person2}`
                         : "Wesele";
                     return (
-                    <Card key={event.id}>
-                      <CardContent>
-                        <CardTitle className="text-lg mb-1 line-clamp-1">
-                          {coupleTitle}
-                        </CardTitle>
-                        {event.event_date && (
-                          <p className="text-sm text-gray-600 mb-2">
-                            {new Date(event.event_date).toLocaleDateString(
-                              "pl-PL",
-                            )}
+                      <Card key={event.id}>
+                        <CardContent>
+                          <CardTitle className="text-lg mb-1 line-clamp-1">
+                            {coupleTitle}
+                          </CardTitle>
+                          {event.event_date && (
+                            <p className="text-sm text-gray-600 mb-2">
+                              {new Date(event.event_date).toLocaleDateString(
+                                "pl-PL",
+                              )}
+                            </p>
+                          )}
+                          <p className="text-xs text-gray-500 mb-4">
+                            {event.slug}.twojadomena.pl
                           </p>
-                        )}
-                        <p className="text-xs text-gray-500 mb-4">
-                          {event.slug}.twojadomena.pl
-                        </p>
-                        <div className="flex gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="flex-1"
-                            onClick={() =>
-                              router.push(
-                                `/dashboard/events/${event.id}/edit`,
-                              )
-                            }
-                          >
-                            Edytuj
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="flex-1"
-                          >
-                            Goście
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="flex-1"
-                          >
-                            Otwórz
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1"
+                              onClick={() =>
+                                router.push(
+                                  `/dashboard/events/${event.id}/edit`,
+                                )
+                              }
+                            >
+                              Edytuj
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1"
+                            >
+                              Goście
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1"
+                            >
+                              Otwórz
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     );
                   })}
                 </div>

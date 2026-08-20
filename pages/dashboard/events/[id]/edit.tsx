@@ -244,47 +244,33 @@ export default function EditEventPage() {
       </Head>
 
       <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
-        <NavBar />
+        {/* <NavBar /> */}
 
         {/* Toolbar */}
-        <div className="w-full mx-auto shrink-0   gap-4  py-3 border-b">
-          <div className="max-w-6xl w-full mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 min-w-0 w-full">
-              <button
-                onClick={() => router.push("/dashboard")}
-                className="text-sm text-gray-500 hover:text-gray-700 whitespace-nowrap"
-              >
-                ← Dashboard
-              </button>
-              <span className="text-gray-300">/</span>
-              <span className="text-sm truncate">Edytor zaproszenia</span>
+        <div className="max-w-6xl w-full mx-auto px-4 py-12 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-4xl font-bold font-serif mb-2">
+                Edytor zaproszenia
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Zmiany zapisują się automatycznie. Podgląd aktualizuje się na
+                bieżąco po prawej stronie.
+              </p>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <span className="text-sm text-gray-400">
-                {saveStatus === "saving" && "Zapisywanie…"}
-                {saveStatus === "saved" && "Zapisano"}
-                {saveStatus === "error" && (
-                  <span className="text-red-500">Błąd zapisu</span>
-                )}
-              </span>
-              {/* <Button
-                size="sm"
-                variant="outline"
-                onClick={() => router.push(`/dashboard/events/${id}/preview`)}
-              >
-                Pełny podgląd →
-              </Button> */}
-            </div>
+            <Button variant="outline" onClick={() => router.push("/dashboard")}>
+              ← Powrót
+            </Button>
           </div>
         </div>
 
         {/* Two-column editor */}
         <div className="flex flex-1 min-h-0">
           {/* Form column */}
-          <div className="w-1/2 overflow-y-auto scrollbar-none border-r">
-            <div className="px-6 py-8 max-w-[630px] mx-auto">
+          <div className="w-1/2 overflow-y-auto scrollbar-none">
+            <div className="px-6 pb-8 max-w-[690px] mx-auto">
               <Card>
-                <CardHeader>
+                {/* <CardHeader>
                   <CardTitle className="text-3xl font-semibold font-serif">
                     Edytor zaproszenia
                   </CardTitle>
@@ -292,12 +278,14 @@ export default function EditEventPage() {
                     Zmiany zapisują się automatycznie. Podgląd aktualizuje się
                     na bieżąco po prawej stronie.
                   </CardDescription>
-                </CardHeader>
+                </CardHeader> */}
 
                 <CardContent>
                   <FieldGroup>
                     <FieldSet>
-                      <FieldLegend>Para</FieldLegend>
+                      <FieldLegend className="font-serif !text-2xl text-semibold">
+                        Para
+                      </FieldLegend>
                       <Field>
                         <FieldLabel htmlFor="couple-person1">
                           Imię pierwszej osoby
@@ -329,7 +317,9 @@ export default function EditEventPage() {
                     <FieldSeparator />
 
                     <FieldSet>
-                      <FieldLegend>Data</FieldLegend>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Data
+                      </FieldLegend>
                       <Field>
                         <FieldLabel htmlFor="event-date">
                           Data wesela
@@ -361,7 +351,9 @@ export default function EditEventPage() {
                     <FieldSeparator />
 
                     <FieldSet>
-                      <FieldLegend>Hero</FieldLegend>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Hero
+                      </FieldLegend>
                       <Field>
                         <FieldLabel htmlFor="hero-title">Tytuł</FieldLabel>
                         <Input
@@ -391,7 +383,9 @@ export default function EditEventPage() {
                     <FieldSeparator />
 
                     <FieldSet>
-                      <FieldLegend>Ceremonia</FieldLegend>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Ceremonia
+                      </FieldLegend>
                       <Field>
                         <FieldLabel htmlFor="ceremony-name">
                           Nazwa miejsca
@@ -423,7 +417,9 @@ export default function EditEventPage() {
                     <FieldSeparator />
 
                     <FieldSet>
-                      <FieldLegend>Przyjęcie</FieldLegend>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Przyjęcie
+                      </FieldLegend>
                       <Field>
                         <FieldLabel htmlFor="reception-name">
                           Nazwa sali
@@ -456,7 +452,9 @@ export default function EditEventPage() {
 
                     {config.sections.schedule && (
                       <FieldSet>
-                        <FieldLegend>Harmonogram</FieldLegend>
+                        <FieldLegend className="font-serif !text-2xl font-semibold">
+                          Harmonogram
+                        </FieldLegend>
                         <div className="space-y-3">
                           {config.schedule.map((item, i) => (
                             <div key={i} className="flex gap-2 items-start">
@@ -503,7 +501,9 @@ export default function EditEventPage() {
 
                     {config.sections.faq && (
                       <FieldSet>
-                        <FieldLegend>FAQ</FieldLegend>
+                        <FieldLegend className="font-serif !text-2xl font-semibold">
+                          FAQ
+                        </FieldLegend>
                         <div className="space-y-4">
                           {config.faq.map((item, i) => (
                             <div
@@ -556,7 +556,9 @@ export default function EditEventPage() {
                     {config.sections.faq && <FieldSeparator />}
 
                     <FieldSet>
-                      <FieldLegend>Widoczność sekcji</FieldLegend>
+                      <FieldLegend className="font-serif !text-2xl font-semibold">
+                        Widoczność sekcji
+                      </FieldLegend>
                       <FieldDescription>
                         Zdecyduj, które sekcje mają pojawić się w zaproszeniu.
                       </FieldDescription>
@@ -618,6 +620,9 @@ export default function EditEventPage() {
 
                 <CardFooter className="border-t flex items-center justify-between gap-4">
                   <div>
+                    <FieldLegend className="font-serif !text-2xl font-semibold">
+                      Szablon
+                    </FieldLegend>
                     <p className="text-sm font-medium">
                       {config.template?.key === "modern"
                         ? "Nowoczesny"
@@ -643,25 +648,23 @@ export default function EditEventPage() {
           </div>
 
           {/* Live preview column */}
-          <div className="w-1/2 flex flex-col min-h-0 bg-gray-50">
-            <div className="shrink-0 flex items-center justify-between border-b px-4 py-1">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Podgląd na żywo
-              </p>
-              <div className="flex items-center gap-0.5 rounded-lg border p-0.5 bg-white">
+          <div className="relative w-1/2 flex flex-col min-h-0 bg-neutral-800 shadow-xl border-l">
+            <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-2 pointer-events-none">
+              <p className="text-xs tracking-wide text-neutral-700 pointer-events-auto"></p>
+              <div className="flex items-center gap-0.5 rounded-lg p-0.5 pointer-events-auto">
                 <button
                   type="button"
                   onClick={() => setPreviewMode("desktop")}
                   aria-label="Podgląd desktop"
                   aria-pressed={previewMode === "desktop"}
                   className={cn(
-                    "rounded-md p-1.5 transition-colors",
+                    "rounded-md p-1.5 transition-all",
                     previewMode === "desktop"
-                      ? "bg-neutral-900 text-white"
-                      : "text-gray-400 hover:text-gray-600",
+                      ? "bg-white text-neutral-900 shadow-md"
+                      : "text-neutral-500 hover:text-neutral-700",
                   )}
                 >
-                  <Monitor className="size-4" />
+                  <Monitor className="size-5" />
                 </button>
                 <button
                   type="button"
@@ -669,13 +672,13 @@ export default function EditEventPage() {
                   aria-label="Podgląd mobile"
                   aria-pressed={previewMode === "mobile"}
                   className={cn(
-                    "rounded-md p-1.5 transition-colors",
+                    "rounded-md p-1.5 transition-all",
                     previewMode === "mobile"
-                      ? "bg-neutral-900 text-white"
-                      : "text-gray-400 hover:text-gray-600",
+                      ? "bg-white text-neutral-900 shadow-md"
+                      : "text-neutral-500 hover:text-neutral-700",
                   )}
                 >
-                  <Smartphone className="size-4" />
+                  <Smartphone className="size-5" />
                 </button>
               </div>
             </div>
@@ -683,12 +686,12 @@ export default function EditEventPage() {
               className={cn(
                 "flex-1 min-h-0",
                 previewMode === "mobile"
-                  ? "flex flex-col items-center py-6 px-4"
+                  ? "flex flex-col items-center py-12 px-4"
                   : "overflow-y-auto",
               )}
             >
               {previewMode === "mobile" ? (
-                <div className="w-[390px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-3xl border bg-white shadow-lg">
+                <div className="w-[390px] max-h-[890px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-600 bg-white shadow-lg">
                   <InvitationRenderer
                     templateKey={config.template?.key ?? "classic"}
                     config={config}

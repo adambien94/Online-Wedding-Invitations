@@ -13,7 +13,7 @@ export default function NavBar() {
             </Link> */}
           </div>
           <nav className="hidden  w-full md:flex space-x-3 text-sm items-center justify-between">
-            <div>
+            {/* <div>
               <Link
                 href="/"
                 className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
@@ -32,7 +32,13 @@ export default function NavBar() {
               >
                 FAQ
               </Link>
-            </div>
+            </div> */}
+            <Link
+              href="/"
+              className="text-3xl font-semibold font-serif text-neutral-900"
+            >
+              Weseleo
+            </Link>
 
             <div className="space-x-3">
               <Link
