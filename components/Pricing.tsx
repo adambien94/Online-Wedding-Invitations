@@ -65,10 +65,10 @@ export default function Pricing() {
             <Card key={p.title} className="text-neutral-900">
               <CardHeader>
                 <CardTitle>{p.title}</CardTitle>
-                <CardDescription className="text-4xl text-neutral-500 font-bold">
+                <CardDescription className="text-4xl text-neutral-900 font-bold">
                   {p.price}
                 </CardDescription>
-                <p className="text-neutral-500 font-bold text-xs">
+                <p className="text-neutral-900 font-bold text-xs">
                   Do 200 zdjęć lub filmów
                 </p>
               </CardHeader>

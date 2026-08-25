@@ -617,9 +617,7 @@ export default function EditEventPage() {
               >
                 <div className="space-y-5">
                   <div className="space-y-5">
-                    <p className="font-medium text-sm text-neutral-800">
-                      Ceremonia
-                    </p>
+                    <p className="text-sm text-neutral-800">Ceremonia</p>
                     <div className="space-y-2">
                       <Label htmlFor="ceremony-name">Nazwa miejsca</Label>
                       <Input
@@ -644,9 +642,7 @@ export default function EditEventPage() {
                     </div>
                   </div>
                   <div className="space-y-5">
-                    <p className="font-medium text-sm text-neutral-800">
-                      Przyjęcie
-                    </p>
+                    <p className="text-sm text-neutral-800">Przyjęcie</p>
                     <div className="space-y-2">
                       <Label htmlFor="reception-name">Nazwa sali</Label>
                       <Input
@@ -736,7 +732,7 @@ export default function EditEventPage() {
               >
                 <div className="space-y-4">
                   {config.faq.map((item, i) => (
-                    <div key={i} className="space-y-2 rounded-2xl border p-3">
+                    <div key={i} className="space-y-2 rounded-3xl border p-3">
                       <div className="flex justify-between items-center">
                         <span className="text-xs text-muted-foreground font-medium">
                           #{i + 1}
@@ -822,12 +818,12 @@ export default function EditEventPage() {
           </div>
 
           {/* Live preview column */}
-          <div className="w-3/4 flex flex-col min-h-0 p-8 pl-2">
+          <div className="w-3/4 flex flex-col min-h-0 p-8 pl-0">
             <Card className="flex-1 min-h-0 gap-3 py-4">
               <div className="flex justify-between items-center px-6">
                 <CardTitle className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <Eye className="size-4" />
-                  Podgląd na żywo
+                  {/* <Eye className="size-4" />
+                  Podgląd na żywo */}
                 </CardTitle>
                 <CardAction>
                   <div className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
@@ -865,13 +861,13 @@ export default function EditEventPage() {
               <CardContent className="flex-1 min-h-0 flex flex-col">
                 <div
                   className={cn(
-                    "flex-1 min-h-0 overflow-hidden rounded-2xl border border-border bg-background",
+                    "flex-1 min-h-0 overflow-hidden rounded-3xl border border-border bg-background",
                     previewMode === "mobile" &&
                       "flex flex-col items-center justify-center bg-muted/40 p-6",
                   )}
                 >
                   {previewMode === "mobile" ? (
-                    <div className="w-[390px] max-h-full flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-300 bg-white shadow-md">
+                    <div className="w-[390px] max-h-full flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-300 bg-white">
                       <InvitationRenderer
                         templateKey={templateKey}
                         config={config}

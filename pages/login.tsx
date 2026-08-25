@@ -50,7 +50,7 @@ export default function LoginPage() {
       </Head>
 
       <div className="min-h-screen bg-gray-100">
-        <header className="w-full">
+        {/* <header className="w-full">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-start h-16">
               <div className="flex items-center">
@@ -58,10 +58,9 @@ export default function LoginPage() {
                   Weseleo
                 </Link>
               </div>
-              <div className="md:hidden">{/* mobile menu placeholder */}</div>
             </div>
           </div>
-        </header>
+        </header> */}
 
         <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
           <Card className="w-full max-w-md shadow-xl">

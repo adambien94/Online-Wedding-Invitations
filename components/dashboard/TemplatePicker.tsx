@@ -84,7 +84,7 @@ function TemplateThumbnail({
     <div className="w-full h-full relative overflow-hidden pointer-events-none select-none">
       <div
         className="absolute origin-top-left"
-        style={{ transform: "scale(0.3)", width: "333%", height: "333%" }}
+        style={{ transform: "scale(0.5)", width: "200%", height: "200%" }}
       >
         <Component config={config} />
       </div>

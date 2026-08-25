@@ -14,10 +14,13 @@ export default function ModernTemplate({ config }: Props) {
       : "Imię & Imię";
 
   return (
-    <div className="font-sans bg-white text-gray-900 min-h-screen">
+    <div
+      className="font-sans bg-white text-gray-900 min-h-screen"
+      style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+    >
       {/* Hero */}
       {sections.hero && (
-        <section className="bg-gray-900 text-white text-center py-24 px-6">
+        <section className="bg-stone-500 text-white text-center py-24 px-6">
           <p className="text-xs tracking-[0.4em] uppercase text-gray-400 mb-5">
             Zaproszenie na ślub
           </p>
@@ -46,10 +49,10 @@ export default function ModernTemplate({ config }: Props) {
 
       {/* Miejsca */}
       {sections.locations && (ceremony.name || reception.name) && (
-        <section className="py-16 px-6">
+        <section className="py-16 px-6 bg-stone-500">
           <div className="max-w-2xl mx-auto grid sm:grid-cols-2 gap-8">
             {ceremony.name && (
-              <div className="border border-gray-200 p-8">
+              <div className="border rounded-3xl border-gray-200 p-8">
                 <p className="text-xs tracking-widest uppercase text-gray-400 mb-3">
                   Ceremonia
                 </p>
@@ -62,7 +65,7 @@ export default function ModernTemplate({ config }: Props) {
               </div>
             )}
             {reception.name && (
-              <div className="border border-gray-200 p-8">
+              <div className="border rounded-3xl border-gray-200 p-8">
                 <p className="text-xs tracking-widest uppercase text-gray-400 mb-3">
                   Wesele
                 </p>
