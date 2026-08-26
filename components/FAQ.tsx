@@ -38,8 +38,10 @@ export default function FAQ() {
             <BadgeQuestionMark className="h-5 w-5" />
           </div> */}
           <div>
-            <h2 className="text-4xl font-serif font-base">Zanim zaczniecie</h2>
-            <p className="mt-2 text-muted-foreground">
+            <h2 className="text-4xl font-serif leading-tight tracking-tight text-neutral-900 sm:text-4xl">
+              Zanim zaczniecie
+            </h2>
+            <p className="mt-2 text-neutral-900">
               Pytania i odpowiedzi, które mogą się przydać.
             </p>
           </div>

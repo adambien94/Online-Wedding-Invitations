@@ -1,95 +1,81 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Camera, CalendarDays, MapPin, SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
+
+const items = [
+  {
+    title: "Galeria",
+    desc: "Zdjęcia i filmy przesyłane prosto z telefonu — goście dodają wspomnienia na bieżąco, a Wy macie wszystko w jednym miejscu.",
+  },
+  {
+    title: "Plan dnia",
+    desc: "Harmonogram, karta dań i karta drinków w czytelnej formie, żeby każdy wiedział, co dzieje się dalej.",
+  },
+  {
+    title: "Dojazd",
+    desc: "Adres kościoła i sali z nawigacją — goście dojadą bez telefonowania i dopytywania o drogę.",
+  },
+  {
+    title: "Prosty panel",
+    desc: "Zarządzanie treścią i zdjęciami bez pomocy technicznej. Edytujesz wszystko sami, kiedy chcecie.",
+  },
+];
 
 export default function Features() {
-  const items = [
-    {
-      title: "Galeria",
-      desc: "Zdjęcia i filmy przesyłane prosto z telefonu.",
-      icon: Camera,
-    },
-    {
-      title: "Plan dnia",
-      desc: "Harmonogram, karta dań i karta drinków.",
-      icon: CalendarDays,
-    },
-    {
-      title: "Dojazd",
-      desc: "Adres kościoła i sala z nawigacją.",
-      icon: MapPin,
-    },
-    {
-      title: "Prosty panel",
-      desc: "Zarządzanie treścią i zdjęciami bez pomocy technicznej.",
-      icon: SlidersHorizontal,
-    },
-  ];
+  const [active, setActive] = useState(0);
 
   return (
-    <section id="features" className="pb-2">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-16">
-        <div className="lg:w-1/4">
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-6">
-            {items.map((it) => {
-              const Icon = it.icon;
-              return (
-                <Card key={it.title}>
-                  <CardHeader className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl border text-neutral-600">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <CardTitle>{it.title}</CardTitle>
-                    </div>
-                  </CardHeader>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-
-        <div>
-          <img
-            src="/phone.png"
-            alt="Phone"
-            className="mt-8 h-200 w-132 object-cover"
-          />
-        </div>
-
-        <div className="lg:w-2/4">
-          <h2 className="text-4xl font-serif font-base text-neutral-900">
+    <section id="features">
+      <div className="bg-blue-50 mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-24 lg:pt-18 lg:pb-8 relative">
+        <div className="lg:col-span-5">
+          <h2 className="text-4xl font-serif leading-tight tracking-tight text-neutral-900 sm:text-4xl">
             Goście wiedzą, co dzieje się dalej
           </h2>
-          <p className="mt-2 text-muted-foreground">
-            Wy zachowujecie wszystkie wspomnienia.
-          </p>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-6">
-            {items.map((it) => {
-              const Icon = it.icon;
+          <div
+            className="mt-14 flex flex-col gap-3"
+            role="tablist"
+            aria-label="Funkcje"
+          >
+            {items.map((item, index) => {
+              const isActive = index === active;
               return (
-                <div key={it.title} className="shadow-none">
-                  <div className="flex items-center gap-4">
-                    {/* <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
-                      <Icon className="h-5 w-5" />
-                    </div> */}
-                    <div>
-                      <h2 className="text-2xl font-serif font-medium">
-                        {it.title}
-                      </h2>
-                      <p className="text-muted-foreground text-sm">{it.desc}</p>
-                    </div>
-                  </div>
-                </div>
+                <button
+                  key={item.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActive(index)}
+                  className={`w-full rounded-xl px-5 py-4 text-left font-medium text-base transition-colors ${
+                    isActive
+                      ? "border border-neutral-400 bg-white  text-neutral-900 shadow-xs"
+                      : "border border-gray-300 bg-blue-50 text-neutral-700 hover:bg-[#dde5ed]"
+                  }`}
+                >
+                  {item.title}
+                </button>
               );
             })}
           </div>
         </div>
+
+        <div className="flex items-center justify-end lg:col-span-5 relative">
+          <p
+            key={active}
+            className="max-w-xs animate-in fade-in duration-300 text-left leading-relaxed text-neutral-800"
+            role="tabpanel"
+          >
+            {items[active].desc}
+          </p>
+        </div>
+
+        <div className="absolute border -right-35 bottom-65 w-90 rounded-2xl overflow-hidden shadow-lg">
+          <img src="tab1.png" alt="" className="scale-105" />
+        </div>
+
+        <div className="absolute border -right-55 bottom-30 w-100 rounded-2xl overflow-hidden shadow-lg">
+          <img src="tab2.png" alt="" className="scale-105" />
+        </div>
+
+        <div className="hidden lg:col-span-4 lg:block" aria-hidden="true" />
       </div>
     </section>
   );

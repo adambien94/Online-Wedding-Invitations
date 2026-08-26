@@ -19,9 +19,11 @@ export default function Home() {
         <NavBar />
         <main className="flex-1">
           <Hero />
-          <Features />
           <Steps />
+          <Features />
           <TemplatesPreview />
+          <Steps />
+
           <Pricing />
           <FAQ />
         </main>

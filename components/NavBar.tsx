@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export default function NavBar() {
   return (
-    <header className="w-full bg-white  backdrop-blur-sm border-b">
+    <header className="w-full bg-white  backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-end h-16">
           <div className="flex items-center">
@@ -35,9 +35,9 @@ export default function NavBar() {
             </div> */}
             <Link
               href="/"
-              className="text-4xl font-semibold font-serif text-neutral-900"
+              className="text-2xl font-serif text-neutral-900 italic"
             >
-              Weseleo
+              Weseleo.
             </Link>
 
             <div className="space-x-3">

@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 import {
   Card,
   CardHeader,
@@ -51,20 +53,23 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-16 border-t border-b border-gray-100">
+    <section id="pricing" className="py-16 bg-orange-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl text-center font-serif font-base">
+        <h2 className="text-4xl font-serif leading-tight tracking-tight text-neutral-900 sm:text-4xl text-center">
           Wybierzcie pojemność Waszej galerii.
         </h2>
-        <p className="mt-2 text-center text-muted-foreground">
+        <p className="mt-2 text-center text-neutral-900">
           Każdy wariant obejmuje jedną stronę wydarzenia i wszystkie funkcje.
         </p>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           {plans.map((p) => (
-            <Card key={p.title} className="text-neutral-900">
+            <Card
+              key={p.title}
+              className="text-neutral-900 bg-orange-100 rounded-none shadow-none"
+            >
               <CardHeader>
-                <CardTitle>{p.title}</CardTitle>
+                <CardTitle className="text-md font-base">{p.title}</CardTitle>
                 <CardDescription className="text-4xl text-neutral-900 font-bold">
                   {p.price}
                 </CardDescription>
@@ -73,7 +78,7 @@ export default function Pricing() {
                 </p>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground ">
+                <ul className="space-y-2 text-sm">
                   {p.features.map((f) => (
                     <li key={f} className="flex items-center gap-2">
                       <Check className="w-4 h-4" /> {f}
@@ -83,9 +88,12 @@ export default function Pricing() {
               </CardContent>
               <Separator />
               <CardFooter>
-                <Button className="w-full" size="lg">
+                <Link
+                  href="/register"
+                  className="w-full inline-flex items-center justify-center bg-neutral-900 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-neutral-700"
+                >
                   Zaczynamy
-                </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}

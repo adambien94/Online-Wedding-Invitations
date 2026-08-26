@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="text-center md:text-left">
-            <div className="text-2xl font-serif text-white">Nasz Dzień</div>
+            <div className="text-2xl font-serif text-white">Weseleo.</div>
             <p className="text-xs mt-2">
               Nowoczesna strona dla gości weselnych.
             </p>
