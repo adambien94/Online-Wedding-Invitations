@@ -54,7 +54,7 @@ export default function TemplatePicker({
                 </Button>
                 {isActive && (
                   <div className="flex justify-end">
-                    <span className="inline-flex items-center gap-1 text-xs border border-neutral-300 text-neutral-500 font-medium bg-neutral-50 px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-1 text-xs  text-neutral-500 font-medium  px-3 py-1 rounded-full">
                       <Check className="size-3.5" />
                       Aktywny
                     </span>

@@ -67,17 +67,17 @@ export default function Features() {
           </p>
         </div>
 
-        <div className="absolute  right-5 bottom-6 w-90 overflow-hidden rounded-2xl shadow-xl">
-          <img src="tab1.png" alt="" className="scale-105" />
+        <div className="absolute  right-5 bottom-6 w-90 overflow-hidden">
+          <img src="phone-front.png" alt="" className="scale-105" />
         </div>
 
-        <div className="absolute  -right-5 bottom-65 w-90 overflow-hidden rounded-2xl shadow-xl">
+        {/* <div className="absolute  -right-5 bottom-65 w-90 overflow-hidden rounded-2xl shadow-xl">
           <img src="tab1.png" alt="" className="scale-105" />
         </div>
 
         <div className="absolute  -right-25 bottom-30 w-100 overflow-hidden rounded-2xl shadow-xl">
           <img src="tab2.png" alt="" className="scale-105" />
-        </div>
+        </div> */}
 
         <div className="hidden lg:col-span-4 lg:block" aria-hidden="true" />
       </div>

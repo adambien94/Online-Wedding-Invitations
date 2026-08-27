@@ -415,10 +415,10 @@ export default function EditEventPage() {
         {/* Shared header + tabs */}
         <div className="shrink-0 bg-white">
           <div className="max-w-[1440px] w-full mx-auto px-4 pt-8 pb-0 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-start mb-6">
+            <div className="flex justify-between items-center mb-6">
               <div>
-                <h1 className="text-4xl font-bold font-serif mb-2 text-neutral-900">
-                  Strona ślubna
+                <h1 className="text-3xl font-serif mb-2 text-neutral-900">
+                  Twoja strona ślubna
                 </h1>
                 {/* <p className="text-sm text-muted-foreground">
                   Zarządzaj swoją stroną ślubną
@@ -498,7 +498,7 @@ export default function EditEventPage() {
               aria-hidden
             />
             <div className="w-128 px-4 py-8 sm:px-6 lg:px-8 space-y-0">
-              <div className="mb-8">
+              {/* <div className="mb-8">
                 <h2 className="text-lg font-medium text-neutral-900">
                   Sekcje strony
                 </h2>
@@ -506,7 +506,7 @@ export default function EditEventPage() {
                   Rozwiń sekcję, aby edytować treść. Przełącznikiem włączysz lub
                   ukryjesz ją na stronie.
                 </p>
-              </div>
+              </div> */}
 
               <SectionEditorCard
                 title="Para"
@@ -822,7 +822,7 @@ export default function EditEventPage() {
 
           {/* Live preview panel */}
           <div className="relative flex-1 min-w-0 flex flex-col min-h-0">
-            <div className="absolute top-4 right-4 z-10 flex items-center gap-0.5 rounded-lg bg-mauve-100/90 p-0.5 shadow-sm backdrop-blur-sm">
+            <div className="absolute top-4 right-4 z-10 flex items-center gap-0.5 rounded-lg bg-mauve-100/90 p-0.5 backdrop-blur-sm">
               <button
                 type="button"
                 onClick={() => setPreviewMode("desktop")}
@@ -831,7 +831,7 @@ export default function EditEventPage() {
                 className={cn(
                   "rounded-md p-1.5 transition-all",
                   previewMode === "desktop"
-                    ? "bg-background text-foreground shadow-sm"
+                    ? "bg-background text-foreground "
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -845,7 +845,7 @@ export default function EditEventPage() {
                 className={cn(
                   "rounded-md p-1.5 transition-all",
                   previewMode === "mobile"
-                    ? "bg-background text-foreground shadow-sm"
+                    ? "bg-background text-foreground "
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
