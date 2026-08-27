@@ -38,9 +38,11 @@ export default function SectionEditorCard({
             <Icon className="size-5 text-neutral-900" strokeWidth={1.75} />
           </span>
           <span className="min-w-0">
-            <span className="block text-sm text-neutral-800">{title}</span>
+            <span className="block text-sm font-medium text-neutral-800">
+              {title}
+            </span>
             {hasToggle && (
-              <span className="mt-0.5 block text-xs text-muted-foreground">
+              <span className="mt-0.5 block text-xs text-neutral-900">
                 {visible ? "Widoczna" : "Ukryta"}
               </span>
             )}

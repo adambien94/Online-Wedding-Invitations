@@ -835,7 +835,7 @@ export default function EditEventPage() {
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Monitor className="size-4" />
+                <Monitor className="size-5" />
               </button>
               <button
                 type="button"
@@ -849,25 +849,25 @@ export default function EditEventPage() {
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Smartphone className="size-4" />
+                <Smartphone className="size-5" />
               </button>
             </div>
             <div
               className={cn(
-                "flex-1 min-h-0 overflow-hidden bg-mauve-100",
+                "flex flex-col items-center justify-center p-6 h-full",
                 previewMode === "mobile" &&
-                  "flex flex-col items-center justify-center p-6",
+                  "flex flex-col items-center justify-center p-6 h-full",
               )}
             >
               {previewMode === "mobile" ? (
-                <div className="w-[390px] max-h-[790px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border  border-neutral-300 bg-white">
+                <div className="w-[390px] max-h-[790px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border  border-neutral-300 ">
                   <InvitationRenderer
                     templateKey={templateKey}
                     config={config}
                   />
                 </div>
               ) : (
-                <div className="h-full overflow-y-auto scrollbar-none r">
+                <div className="w-9/10 max-h-[90%] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border  border-neutral-300 ">
                   <InvitationRenderer
                     templateKey={templateKey}
                     config={config}
