@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card";
 import Spinner from "@/components/ui/Spinner";
 import SectionEditorCard from "@/components/dashboard/SectionEditorCard";
 import TemplatePicker from "@/components/dashboard/TemplatePicker";
@@ -15,7 +14,6 @@ import {
   CalendarDays,
   CircleHelp,
   Clock3,
-  Eye,
   Heart,
   ImageIcon,
   LayoutGrid,
@@ -487,14 +485,18 @@ export default function EditEventPage() {
 
         <div
           className={cn(
-            "flex-1 min-h-0 w-full max-w-[1440px] mx-auto",
+            "flex-1 min-h-0 w-full",
             activeTab === "sekcje" ? "flex" : "hidden",
           )}
           aria-hidden={activeTab !== "sekcje"}
         >
-          {/* Form column */}
-          <div className="w-1/4 min-w-128 overflow-y-auto scrollbar-none">
-            <div className="p-8 mx-auto space-y-2">
+          {/* Form drawer — white extends to viewport left; content aligns with header */}
+          <aside className="shrink-0 flex overflow-y-auto scrollbar-none shadow-xl z-10 bg-background">
+            <div
+              className="shrink-0 w-[max(0px,calc((100vw-1440px)/2))]"
+              aria-hidden
+            />
+            <div className="w-128 px-4 py-8 sm:px-6 lg:px-8 space-y-0">
               <div className="mb-8">
                 <h2 className="font-serif text-3xl font-semibold text-neutral-900">
                   Sekcje strony
@@ -815,75 +817,63 @@ export default function EditEventPage() {
                 </Button>
               </div> */}
             </div>
-          </div>
+          </aside>
 
-          {/* Live preview column */}
-          <div className="w-3/4 flex flex-col min-h-0 p-8 pl-0">
-            <Card className="flex-1 min-h-0 gap-3 py-4">
-              <div className="flex justify-between items-center px-6">
-                <CardTitle className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  {/* <Eye className="size-4" />
-                  Podgląd na żywo */}
-                </CardTitle>
-                <CardAction>
-                  <div className="flex items-center gap-0.5 rounded-lg bg-mauve-100 p-0.5">
-                    <button
-                      type="button"
-                      onClick={() => setPreviewMode("desktop")}
-                      aria-label="Podgląd desktop"
-                      aria-pressed={previewMode === "desktop"}
-                      className={cn(
-                        "rounded-md p-1.5 transition-all",
-                        previewMode === "desktop"
-                          ? "bg-background text-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground",
-                      )}
-                    >
-                      <Monitor className="size-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setPreviewMode("mobile")}
-                      aria-label="Podgląd mobile"
-                      aria-pressed={previewMode === "mobile"}
-                      className={cn(
-                        "rounded-md p-1.5 transition-all",
-                        previewMode === "mobile"
-                          ? "bg-background text-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground",
-                      )}
-                    >
-                      <Smartphone className="size-4" />
-                    </button>
-                  </div>
-                </CardAction>
-              </div>
-              <CardContent className="flex-1 min-h-0 flex flex-col">
-                <div
-                  className={cn(
-                    "flex-1 min-h-0 overflow-hidden border border-border bg-background",
-                    previewMode === "mobile" &&
-                      "flex flex-col items-center justify-center bg-mauve-50 p-6",
-                  )}
-                >
-                  {previewMode === "mobile" ? (
-                    <div className="w-[390px] max-h-full flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-300 bg-white">
-                      <InvitationRenderer
-                        templateKey={templateKey}
-                        config={config}
-                      />
-                    </div>
-                  ) : (
-                    <div className="h-full overflow-y-auto scrollbar-none">
-                      <InvitationRenderer
-                        templateKey={templateKey}
-                        config={config}
-                      />
-                    </div>
-                  )}
+          {/* Live preview panel */}
+          <div className="relative flex-1 min-w-0 flex flex-col min-h-0">
+            <div className="absolute top-4 right-4 z-10 flex items-center gap-0.5 rounded-lg bg-mauve-100/90 p-0.5 shadow-sm backdrop-blur-sm">
+              <button
+                type="button"
+                onClick={() => setPreviewMode("desktop")}
+                aria-label="Podgląd desktop"
+                aria-pressed={previewMode === "desktop"}
+                className={cn(
+                  "rounded-md p-1.5 transition-all",
+                  previewMode === "desktop"
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <Monitor className="size-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setPreviewMode("mobile")}
+                aria-label="Podgląd mobile"
+                aria-pressed={previewMode === "mobile"}
+                className={cn(
+                  "rounded-md p-1.5 transition-all",
+                  previewMode === "mobile"
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <Smartphone className="size-4" />
+              </button>
+            </div>
+            <div
+              className={cn(
+                "flex-1 min-h-0 overflow-hidden bg-background",
+                previewMode === "mobile" &&
+                  "flex flex-col items-center justify-center p-6",
+              )}
+            >
+              {previewMode === "mobile" ? (
+                <div className="w-[390px] max-h-full flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-300 bg-white">
+                  <InvitationRenderer
+                    templateKey={templateKey}
+                    config={config}
+                  />
                 </div>
-              </CardContent>
-            </Card>
+              ) : (
+                <div className="h-full overflow-y-auto scrollbar-none">
+                  <InvitationRenderer
+                    templateKey={templateKey}
+                    config={config}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

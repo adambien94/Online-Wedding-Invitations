@@ -27,7 +27,7 @@ export default function SectionEditorCard({
 
   return (
     <Card className="gap-0 py-0">
-      <div className="flex items-center px-4 py-4">
+      <div className="flex items-center pr-1 py-4">
         <button
           type="button"
           onClick={() => onOpenChange(!open)}
