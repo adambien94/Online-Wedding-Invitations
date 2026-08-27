@@ -413,7 +413,7 @@ export default function EditEventPage() {
 
       <div className="h-screen flex flex-col overflow-hidden bg-mauve-100">
         {/* Shared header + tabs */}
-        <div className="shrink-0 border-b ">
+        <div className="shrink-0 bg-white">
           <div className="max-w-[1440px] w-full mx-auto px-4 pt-8 pb-0 sm:px-6 lg:px-8">
             <div className="flex justify-between items-start mb-6">
               <div>
@@ -425,6 +425,7 @@ export default function EditEventPage() {
                 </p> */}
               </div>
               <Button
+                size="lg"
                 variant="outline"
                 onClick={() => router.push("/dashboard")}
               >
@@ -498,7 +499,7 @@ export default function EditEventPage() {
             />
             <div className="w-128 px-4 py-8 sm:px-6 lg:px-8 space-y-0">
               <div className="mb-8">
-                <h2 className="font-serif text-3xl font-semibold text-neutral-900">
+                <h2 className="text-lg font-medium text-neutral-900">
                   Sekcje strony
                 </h2>
                 <p className="mt-1 text-sm text-neutral-900">
@@ -853,7 +854,7 @@ export default function EditEventPage() {
             </div>
             <div
               className={cn(
-                "flex-1 min-h-0 overflow-hidden bg-background",
+                "flex-1 min-h-0 overflow-hidden bg-mauve-100",
                 previewMode === "mobile" &&
                   "flex flex-col items-center justify-center p-6",
               )}

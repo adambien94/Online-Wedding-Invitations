@@ -26,7 +26,7 @@ export default function SectionEditorCard({
   const hasToggle = typeof visible === "boolean" && onVisibleChange;
 
   return (
-    <Card className="gap-0 py-0">
+    <Card className="gap-0 py-0 border-b">
       <div className="flex items-center pr-1 py-4">
         <button
           type="button"
@@ -68,9 +68,7 @@ export default function SectionEditorCard({
         </Button>
       </div>
 
-      {open && children != null && (
-        <div className="px-4 pt-2 pb-5">{children}</div>
-      )}
+      {open && children != null && <div className="pt-2 pb-5">{children}</div>}
     </Card>
   );
 }

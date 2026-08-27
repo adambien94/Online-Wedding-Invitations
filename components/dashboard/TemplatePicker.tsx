@@ -26,7 +26,7 @@ export default function TemplatePicker({
           return (
             <div
               key={tmpl.key}
-              className={`bg-white border overflow-hidden flex flex-col transition-all ${
+              className={`bg-white overflow-hidden flex flex-col transition-all ${
                 isActive ? "" : "hover:shadow-lg"
               }`}
             >
@@ -34,9 +34,11 @@ export default function TemplatePicker({
                 <TemplateThumbnail tmplKey={tmpl.key} config={config} />
               </div>
 
-              <div className="p-5 flex flex-col gap-3 flex-1 border-t">
+              <div className="p-5 flex flex-col gap-3 flex-1 shadow-md">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-md font-md text-gray-900">{tmpl.name}</h2>
+                  <h2 className="text-md font-medium text-gray-900">
+                    {tmpl.name}
+                  </h2>
                 </div>
                 <p className="text-sm text-neutral-900 flex-1 pb-2">
                   {tmpl.description}
