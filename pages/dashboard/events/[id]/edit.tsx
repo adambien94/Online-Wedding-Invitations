@@ -499,7 +499,7 @@ export default function EditEventPage() {
                 <h2 className="font-serif text-3xl font-semibold text-neutral-900">
                   Sekcje strony
                 </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-1 text-sm text-neutral-900">
                   Rozwiń sekcję, aby edytować treść. Przełącznikiem włączysz lub
                   ukryjesz ją na stronie.
                 </p>

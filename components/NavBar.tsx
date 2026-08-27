@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 export default function NavBar() {
   return (
     <header className="w-full bg-white  backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-end h-16">
           <div className="flex items-center">
             {/* <Link href="/" className="text-4xl font-serif text-rose-900">

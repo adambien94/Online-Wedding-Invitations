@@ -51,7 +51,7 @@ export default function LoginPage() {
 
       <div className="min-h-screen bg-gray-100">
         {/* <header className="w-full">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-start h-16">
               <div className="flex items-center">
                 <Link href="/" className="text-4xl font-serif text-neutral-900">
@@ -69,7 +69,7 @@ export default function LoginPage() {
                 <CardTitle className="text-4xl font-bold font-serif">
                   Zaczynamy
                 </CardTitle>
-                <CardDescription className="text-sm">
+                <CardDescription className="text-sm text-neutral-900">
                   Wprowadź swoje dane, aby stworzyć stronę dla Waszego ślubu.
                 </CardDescription>
               </div>

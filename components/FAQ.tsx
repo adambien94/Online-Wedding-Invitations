@@ -32,7 +32,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:flex">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 lg:flex">
         <div className="lg:w-1/2 flex gap-4">
           {/* <div className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-rose-100 text-rose-900">
             <BadgeQuestionMark className="h-5 w-5" />
@@ -48,10 +48,10 @@ export default function FAQ() {
         </div>
 
         <div className="mt-6 lg:mt-0 lg:w-1/2">
-          <Accordion className="border-none">
+          <Accordion className="border-none rounded-none">
             {items.map((it) => (
               <AccordionItem key={it.q} value={it.q}>
-                <AccordionTrigger>{it.q}</AccordionTrigger>
+                <AccordionTrigger className="text-md">{it.q}</AccordionTrigger>
                 <AccordionContent>{it.a}</AccordionContent>
               </AccordionItem>
             ))}

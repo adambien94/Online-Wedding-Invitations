@@ -11,7 +11,7 @@ const reactions = [
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-linear-to-br from-mauve-400 via-mauve-500 to-mauve-400">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:py-0">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:py-0">
         <div className="relative z-10 max-w-xl">
           <p className="text-xs uppercase tracking-[0.22em] text-white sm:text-sm">
             Weseleo <span className="font-bold">strona wesela</span>
@@ -27,10 +27,10 @@ export default function Hero() {
           </Link>
         </div>
 
-        <div className="relative flex items-end justify-center lg:justify-end top-32">
+        <div className="relative flex items-end justify-center lg:justify-center top-32">
           <div className="relative w-full max-w-85 sm:max-w-120">
             <img
-              src="/phone.png"
+              src="/phone-front.png"
               alt="Podgląd galerii gości na telefonie"
               className="relative z-10 mx-auto w-[78%] -left-4 drop-shadow-2xl lg:w-[85%]"
             />

@@ -32,9 +32,9 @@ export default function Steps() {
 
   return (
     <section className="py-18">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-serif leading-tight tracking-tight text-neutral-900 sm:text-4xl text-center">
-          Wy przygotowujecie stronę. Goście wypełniają ją wspomnieniami.
+          Wy przygotowujecie stronę. <br /> Goście wypełniają ją wspomnieniami.
         </h2>
         <p className="mt-2 text-center text-neutral-900">
           Wy zachowujecie wszystkie wspomnienia.
@@ -45,11 +45,11 @@ export default function Steps() {
             return (
               <div key={s.title}>
                 <CardHeader className="flex flex-col items-center gap-4 text-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-neutral-400">
-                    <Icon className="h-18 w-18" />
+                  <div className="flex  items-center justify-center rounded-2xl text-neutral-900">
+                    <Icon className="w-8 h-8" />
                   </div>
                   <div>
-                    <CardTitle>{s.title}</CardTitle>
+                    <CardTitle className="font-base">{s.title}</CardTitle>
                     <CardDescription className="text-neutral-900">
                       {s.desc}
                     </CardDescription>

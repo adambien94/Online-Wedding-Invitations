@@ -53,7 +53,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-16 bg-orange-50">
+    <section id="pricing" className="py-16 bg-mauve-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-serif leading-tight tracking-tight text-neutral-900 sm:text-4xl text-center">
           Wybierzcie pojemność Waszej galerii.
@@ -66,7 +66,7 @@ export default function Pricing() {
           {plans.map((p) => (
             <Card
               key={p.title}
-              className="text-neutral-900 bg-orange-100 rounded-none shadow-none"
+              className="text-neutral-900 bg-mauve-200 outline-none rounded-none shadow-none"
             >
               <CardHeader>
                 <CardTitle className="text-md font-base">{p.title}</CardTitle>

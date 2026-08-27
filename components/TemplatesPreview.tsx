@@ -26,7 +26,7 @@ export default function TemplatesPreview() {
 
   return (
     <section className="pt-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between">
           <div>
             <h2 className="text-4xl font-serif font-base">
@@ -51,7 +51,7 @@ export default function TemplatesPreview() {
               {images.map((src, idx) => (
                 <CarouselItem
                   key={src}
-                  className="basis-full lg:basis-1/5 bg-rose-50 mx-4 text-center pr-3 pt-5"
+                  className="basis-full lg:basis-1/5 bg-mauve-100 mx-2 text-center pr-3 pt-5"
                 >
                   <div className="h-64 overflow-hidden rounded-2xl">
                     {/* <p className="pt-3 text-sm text-left">Klasyczny</p> */}
