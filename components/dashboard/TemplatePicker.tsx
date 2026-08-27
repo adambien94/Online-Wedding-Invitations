@@ -26,25 +26,23 @@ export default function TemplatePicker({
           return (
             <div
               key={tmpl.key}
-              className={`bg-white shadow-md rounded-4xl border overflow-hidden flex flex-col transition-all ${
+              className={`bg-white border overflow-hidden flex flex-col transition-all ${
                 isActive ? "" : "hover:shadow-lg"
               }`}
             >
-              <div className="aspect-4/3 bg-gray-100 flex items-center justify-center overflow-hidden">
+              <div className="aspect-4/3 bg-mauve-100 flex items-center justify-center overflow-hidden">
                 <TemplateThumbnail tmplKey={tmpl.key} config={config} />
               </div>
 
               <div className="p-5 flex flex-col gap-3 flex-1 border-t">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-serif text-lg font-semibold text-gray-900">
-                    {tmpl.name}
-                  </h2>
+                  <h2 className="text-md font-md text-gray-900">{tmpl.name}</h2>
                 </div>
                 <p className="text-sm text-neutral-900 flex-1 pb-2">
                   {tmpl.description}
                 </p>
                 <Button
-                  size="sm"
+                  size="lg"
                   disabled={isActive || isSaving}
                   className={isActive ? "hidden" : ""}
                   variant="outline"

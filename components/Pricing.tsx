@@ -70,7 +70,7 @@ export default function Pricing() {
             >
               <CardHeader>
                 <CardTitle className="text-md font-base">{p.title}</CardTitle>
-                <CardDescription className="text-4xl text-neutral-900 font-bold">
+                <CardDescription className="text-4xl text-mauve-700 font-bold">
                   {p.price}
                 </CardDescription>
                 <p className="text-neutral-900 font-bold text-xs">

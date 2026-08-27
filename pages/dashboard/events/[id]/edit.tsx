@@ -413,7 +413,7 @@ export default function EditEventPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="h-screen flex flex-col overflow-hidden bg-gray-50">
+      <div className="h-screen flex flex-col overflow-hidden bg-mauve-100">
         {/* Shared header + tabs */}
         <div className="shrink-0 border-b ">
           <div className="max-w-[1440px] w-full mx-auto px-4 pt-8 pb-0 sm:px-6 lg:px-8">
@@ -826,7 +826,7 @@ export default function EditEventPage() {
                   Podgląd na żywo */}
                 </CardTitle>
                 <CardAction>
-                  <div className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+                  <div className="flex items-center gap-0.5 rounded-lg bg-mauve-100 p-0.5">
                     <button
                       type="button"
                       onClick={() => setPreviewMode("desktop")}
@@ -861,9 +861,9 @@ export default function EditEventPage() {
               <CardContent className="flex-1 min-h-0 flex flex-col">
                 <div
                   className={cn(
-                    "flex-1 min-h-0 overflow-hidden rounded-3xl border border-border bg-background",
+                    "flex-1 min-h-0 overflow-hidden border border-border bg-background",
                     previewMode === "mobile" &&
-                      "flex flex-col items-center justify-center bg-muted/40 p-6",
+                      "flex flex-col items-center justify-center bg-mauve-50 p-6",
                   )}
                 >
                   {previewMode === "mobile" ? (
@@ -898,7 +898,7 @@ export default function EditEventPage() {
             <h2 className="text-4xl font-serif font-semibold mb-4">
               Publikacja
             </h2>
-            <p className="text-sm text-muted-foreground mb-8">
+            <p className="text-sm text-neutral-900 mb-8">
               Opublikuj stronę, aby była dostępna pod Twoją subdomeną.
             </p>
             <Button

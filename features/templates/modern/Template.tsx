@@ -32,7 +32,7 @@ export default function ModernTemplate({ config }: Props) {
           )}
           {event.date && (
             <div className="mt-8 inline-flex items-center gap-3">
-              <div className="w-10 h-px bg-gray-600" />
+              <div className="w-10 h-px bg-mauve-600" />
               <p className="text-sm tracking-widest uppercase text-gray-400">
                 {new Date(event.date).toLocaleDateString("pl-PL", {
                   day: "numeric",
@@ -41,7 +41,7 @@ export default function ModernTemplate({ config }: Props) {
                 })}
                 {event.time && ` · ${event.time}`}
               </p>
-              <div className="w-10 h-px bg-gray-600" />
+              <div className="w-10 h-px bg-mauve-600" />
             </div>
           )}
         </section>
@@ -83,7 +83,7 @@ export default function ModernTemplate({ config }: Props) {
 
       {/* Harmonogram */}
       {sections.schedule && schedule.length > 0 && (
-        <section className="py-16 px-6 bg-gray-50">
+        <section className="py-16 px-6 bg-mauve-100">
           <div className="max-w-lg mx-auto">
             <p className="text-xs tracking-widest uppercase text-gray-400 mb-10 text-center">
               Plan dnia

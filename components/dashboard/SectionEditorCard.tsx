@@ -35,7 +35,7 @@ export default function SectionEditorCard({
           className="flex min-w-0 flex-1 items-center gap-3 text-left"
         >
           <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl border">
-            <Icon className="size-5 text-neutral-600" strokeWidth={1.75} />
+            <Icon className="size-5 text-neutral-900" strokeWidth={1.75} />
           </span>
           <span className="min-w-0">
             <span className="block text-sm text-neutral-800">{title}</span>

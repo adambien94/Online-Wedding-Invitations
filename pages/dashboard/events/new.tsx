@@ -127,7 +127,7 @@ export default function NewEventPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-mauve-100">
         <NavBar />
 
         <main className="max-w-lg mx-auto px-4 py-12 sm:px-6">

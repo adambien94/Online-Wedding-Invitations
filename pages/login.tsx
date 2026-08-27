@@ -49,7 +49,7 @@ export default function LoginPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-mauve-100">
         {/* <header className="w-full">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-start h-16">
@@ -63,7 +63,7 @@ export default function LoginPage() {
         </header> */}
 
         <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-          <Card className="w-full max-w-md shadow-xl">
+          <Card className="w-full max-w-md ">
             <CardContent className="space-y-6 p-8">
               <div className="space-y-2">
                 <CardTitle className="text-4xl font-bold font-serif">
@@ -117,7 +117,12 @@ export default function LoginPage() {
                   />
                 </div>
 
-                <Button className="w-full" disabled={loading} type="submit">
+                <Button
+                  className="w-full"
+                  disabled={loading}
+                  type="submit"
+                  size="lg"
+                >
                   {loading ? "Logowanie..." : "Zaloguj się"}
                 </Button>
               </form>
