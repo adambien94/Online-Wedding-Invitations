@@ -414,11 +414,11 @@ export default function EditEventPage() {
       <div className="h-screen flex flex-col overflow-hidden bg-mauve-100">
         {/* Shared header + tabs */}
         <div className="shrink-0 bg-white">
-          <div className="max-w-[1440px] w-full mx-auto px-4 pt-8 pb-0 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center mb-6">
+          <div className="max-w-[1440px] w-full mx-auto px-4 py-4 pb-0 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-start mb-4">
               <div>
-                <h1 className="text-3xl font-serif mb-2 text-neutral-900">
-                  Twoja strona ślubna
+                <h1 className="text-2xl italic font-serif mb-2 text-neutral-900">
+                  Weseleo.
                 </h1>
                 {/* <p className="text-sm text-muted-foreground">
                   Zarządzaj swoją stroną ślubną
@@ -860,14 +860,14 @@ export default function EditEventPage() {
               )}
             >
               {previewMode === "mobile" ? (
-                <div className="w-[390px] max-h-full flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border border-neutral-300 bg-white">
+                <div className="w-[390px] max-h-[790px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border  border-neutral-300 bg-white">
                   <InvitationRenderer
                     templateKey={templateKey}
                     config={config}
                   />
                 </div>
               ) : (
-                <div className="h-full overflow-y-auto scrollbar-none">
+                <div className="h-full overflow-y-auto scrollbar-none r">
                   <InvitationRenderer
                     templateKey={templateKey}
                     config={config}
