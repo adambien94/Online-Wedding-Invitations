@@ -127,7 +127,7 @@ export default function LoginPage() {
                 </Button>
               </form>
 
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="text-center text-sm text-neutral-900">
                 Nie masz konta?{" "}
                 <Link href="/register" className="underline">
                   Zarejestruj się
