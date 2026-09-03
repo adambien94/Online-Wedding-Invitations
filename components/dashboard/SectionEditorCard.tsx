@@ -26,7 +26,7 @@ export default function SectionEditorCard({
   const hasToggle = typeof visible === "boolean" && onVisibleChange;
 
   return (
-    <Card className="gap-0 py-0 border-b">
+    <Card className="gap-0 py-0 border-b overflow-visible">
       <div className="flex items-center pr-1 py-4">
         <button
           type="button"

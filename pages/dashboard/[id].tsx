@@ -396,7 +396,13 @@ export default function EditEventPage() {
       if (!res.ok) throw new Error("Błąd publikacji");
       setPublishSuccess(true);
       setEventMeta((prev) =>
-        prev ? { ...prev, status: "published", published_at: new Date().toISOString() } : prev,
+        prev
+          ? {
+              ...prev,
+              status: "published",
+              published_at: new Date().toISOString(),
+            }
+          : prev,
       );
     } catch {
       setError("Błąd publikacji — spróbuj ponownie");
@@ -414,8 +420,7 @@ export default function EditEventPage() {
     const slug = eventMeta?.slug;
     if (!slug) return;
     const host = window.location.hostname;
-    const isLocal =
-      host === "localhost" || host.endsWith(".localhost");
+    const isLocal = host === "localhost" || host.endsWith(".localhost");
     const url = isLocal
       ? `${window.location.protocol}//${slug}.localhost:${window.location.port || "3000"}`
       : `https://${slug}.weseleo.pl`;
@@ -461,13 +466,18 @@ export default function EditEventPage() {
                   Weseleo.
                 </h1>
               </div>
-              {saveStatus !== "idle" && (
-                <p className="text-sm text-muted-foreground pt-2">
-                  {saveStatus === "saving" && "Zapisywanie…"}
-                  {saveStatus === "saved" && "Zapisano"}
-                  {saveStatus === "error" && "Błąd zapisu"}
-                </p>
-              )}
+              <div className="flex items-center gap-3">
+                {saveStatus !== "idle" && (
+                  <p className="text-sm text-muted-foreground">
+                    {saveStatus === "saving" && "Zapisywanie…"}
+                    {saveStatus === "saved" && "Zapisano"}
+                    {saveStatus === "error" && "Błąd zapisu"}
+                  </p>
+                )}
+                <Button variant="outline" onClick={handleLogout}>
+                  Wyloguj się
+                </Button>
+              </div>
             </div>
 
             <nav className="flex gap-6" aria-label="Kroki edycji">
@@ -515,20 +525,15 @@ export default function EditEventPage() {
           aria-hidden={activeTab !== "przeglad"}
         >
           <main className="max-w-[1440px] mx-auto px-4 py-12 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-start mb-8">
-              <div>
-                <h2 className="text-4xl font-bold font-serif mb-2">
-                  Twoje wesele
-                </h2>
-                {userEmail && (
-                  <p className="text-muted-foreground">
-                    Zalogowany jako: <strong>{userEmail}</strong>
-                  </p>
-                )}
-              </div>
-              <Button variant="outline" onClick={handleLogout}>
-                Wyloguj się
-              </Button>
+            <div className="mb-8 text-center">
+              <h2 className="text-4xl font-bold font-serif mb-2">
+                Twoje wesele
+              </h2>
+              {userEmail && (
+                <p className="text-neutral-900">
+                  Zalogowany jako: <strong>{userEmail}</strong>
+                </p>
+              )}
             </div>
 
             {eventMeta && (
@@ -544,7 +549,7 @@ export default function EditEventPage() {
               </Card>
             )}
 
-            <div>
+            {/* <div>
               <h3 className="text-3xl font-serif font-semibold mb-4">
                 Zaproszenie
               </h3>
@@ -601,7 +606,7 @@ export default function EditEventPage() {
                   </CardContent>
                 </Card>
               </div>
-            </div>
+            </div> */}
           </main>
         </div>
 
