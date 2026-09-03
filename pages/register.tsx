@@ -330,8 +330,8 @@ export default function RegisterPage() {
                   <div className="rounded-md bg-blue-50 p-4 text-sm text-blue-800">
                     Sprawdziliśmy — wysłaliśmy wiadomość na adres{" "}
                     <strong>{email}</strong>. Kliknij link w mailu, aby
-                    aktywować konto. Po potwierdzeniu zostaniesz przekierowany
-                    na pulpit.
+                    aktywować konto. Po potwierdzeniu zaloguj się — przejdziesz
+                    od razu do edycji wesela.
                   </div>
 
                   <div className="flex gap-3">

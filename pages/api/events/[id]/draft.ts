@@ -31,7 +31,7 @@ export default async function handler(
   // Verify the event belongs to this user
   const { data: event, error: eventError } = await sb
     .from("events")
-    .select("id, owner_id")
+    .select("id, owner_id, slug, status, event_date, published_at")
     .eq("id", eventId)
     .single();
 
@@ -51,7 +51,17 @@ export default async function handler(
     if (draftError || !draft)
       return res.status(404).json({ message: "Draft nie istnieje" });
 
-    return res.status(200).json({ draft });
+    return res.status(200).json({
+      draft,
+      event: {
+        id: event.id,
+        slug: event.slug,
+        status: event.status,
+        event_date: event.event_date,
+        published_at: event.published_at,
+      },
+      user: { email: user.email },
+    });
   }
 
   // PATCH — partial update of config

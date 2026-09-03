@@ -32,8 +32,20 @@ export default async function handler(
   const { person1, person2, eventDate, eventTime, reservationId } =
     req.body || {};
 
-  if (!person1 || !person2 || !reservationId)
+  if (!reservationId)
     return res.status(400).json({ message: "Brakujące pola" });
+
+  // One wedding per user — return existing if already created
+  const { data: existingEvents } = await sb
+    .from("events")
+    .select("id, slug")
+    .eq("owner_id", user.id)
+    .order("created_at", { ascending: true })
+    .limit(1);
+
+  if (existingEvents && existingEvents.length > 0) {
+    return res.status(200).json({ success: true, event: existingEvents[0] });
+  }
 
   // Fetch the reservation belonging to this user
   const { data: reservation, error: resError } = await sb
@@ -77,11 +89,14 @@ export default async function handler(
       .status(500)
       .json({ message: eventError?.message ?? "Błąd tworzenia eventu" });
 
-  // Build initial draft config from form data.
+  // Initial draft — couple/date filled later in the sections editor.
   // Template starts empty so the user must pick one before editing/publishing.
   const draftConfig = {
     ...defaultInvitationConfig,
-    couple: { person1, person2 },
+    couple: {
+      person1: typeof person1 === "string" ? person1 : "",
+      person2: typeof person2 === "string" ? person2 : "",
+    },
     event: {
       date: eventDate ?? "",
       time: eventTime ?? "",

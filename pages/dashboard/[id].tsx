@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Spinner from "@/components/ui/Spinner";
@@ -15,6 +16,7 @@ import {
   CircleHelp,
   Clock3,
   Heart,
+  Home,
   ImageIcon,
   LayoutGrid,
   MapPin,
@@ -41,13 +43,22 @@ type SectionId =
 
 const AUTOSAVE_DELAY = 1200;
 
-type WorkspaceTab = "motyw" | "sekcje" | "publikacja";
+type WorkspaceTab = "przeglad" | "motyw" | "sekcje" | "publikacja";
+
+interface EventMeta {
+  id: string;
+  slug: string;
+  status: string;
+  event_date: string | null;
+  published_at: string | null;
+}
 
 const TABS: {
   id: WorkspaceTab;
   label: string;
   icon: typeof Paintbrush;
 }[] = [
+  { id: "przeglad", label: "Przegląd", icon: Home },
   { id: "motyw", label: "Motyw", icon: Paintbrush },
   { id: "sekcje", label: "Sekcje", icon: LayoutGrid },
   { id: "publikacja", label: "Publikacja", icon: Settings },
@@ -63,7 +74,12 @@ function useDebounce<T>(value: T, delay: number): T {
 }
 
 function parseTab(value: unknown): WorkspaceTab | null {
-  if (value === "motyw" || value === "sekcje" || value === "publikacja") {
+  if (
+    value === "przeglad" ||
+    value === "motyw" ||
+    value === "sekcje" ||
+    value === "publikacja"
+  ) {
     return value;
   }
   return null;
@@ -86,7 +102,9 @@ export default function EditEventPage() {
   const [savingTemplate, setSavingTemplate] = useState<string | null>(null);
   const [publishing, setPublishing] = useState(false);
   const [publishSuccess, setPublishSuccess] = useState(false);
-  const [activeTab, setActiveTab] = useState<WorkspaceTab>("motyw");
+  const [activeTab, setActiveTab] = useState<WorkspaceTab>("przeglad");
+  const [eventMeta, setEventMeta] = useState<EventMeta | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [expandedSection, setExpandedSection] = useState<SectionId | null>(
     "couple",
   );
@@ -102,7 +120,7 @@ export default function EditEventPage() {
     (tab: WorkspaceTab) => {
       if (!id) return;
       setActiveTab(tab);
-      const nextUrl = `/dashboard/events/${id}/edit?tab=${tab}`;
+      const nextUrl = `/dashboard/${id}?tab=${tab}`;
       if (router.asPath === nextUrl) return;
       updatingUrl.current = true;
       router.replace(nextUrl, undefined, { shallow: true }).finally(() => {
@@ -129,7 +147,7 @@ export default function EditEventPage() {
       return;
     }
 
-    setTab("motyw");
+    setTab("przeglad");
   }, [router.isReady, config, setTab]);
 
   // Browser back/forward only — ignore our own shallow URL writes
@@ -185,8 +203,10 @@ export default function EditEventPage() {
         return;
       }
 
-      const { draft } = await res.json();
-      setConfig(draft.config as InvitationConfig);
+      const data = await res.json();
+      setConfig(data.draft.config as InvitationConfig);
+      if (data.event) setEventMeta(data.event as EventMeta);
+      if (data.user?.email) setUserEmail(data.user.email);
       setLoading(false);
     };
 
@@ -375,11 +395,31 @@ export default function EditEventPage() {
 
       if (!res.ok) throw new Error("Błąd publikacji");
       setPublishSuccess(true);
+      setEventMeta((prev) =>
+        prev ? { ...prev, status: "published", published_at: new Date().toISOString() } : prev,
+      );
     } catch {
       setError("Błąd publikacji — spróbuj ponownie");
     } finally {
       setPublishing(false);
     }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+  };
+
+  const openPublicSite = () => {
+    const slug = eventMeta?.slug;
+    if (!slug) return;
+    const host = window.location.hostname;
+    const isLocal =
+      host === "localhost" || host.endsWith(".localhost");
+    const url = isLocal
+      ? `${window.location.protocol}//${slug}.localhost:${window.location.port || "3000"}`
+      : `https://${slug}.weseleo.pl`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   if (loading) {
@@ -420,16 +460,14 @@ export default function EditEventPage() {
                 <h1 className="text-2xl italic font-serif mb-2 text-neutral-900">
                   Weseleo.
                 </h1>
-                {/* <p className="text-sm text-muted-foreground">
-                  Zarządzaj swoją stroną ślubną
-                </p> */}
               </div>
-              <Button
-                variant="outline"
-                onClick={() => router.push("/dashboard")}
-              >
-                ← Powrót
-              </Button>
+              {saveStatus !== "idle" && (
+                <p className="text-sm text-muted-foreground pt-2">
+                  {saveStatus === "saving" && "Zapisywanie…"}
+                  {saveStatus === "saved" && "Zapisano"}
+                  {saveStatus === "error" && "Błąd zapisu"}
+                </p>
+              )}
             </div>
 
             <nav className="flex gap-6" aria-label="Kroki edycji">
@@ -468,6 +506,104 @@ export default function EditEventPage() {
             <p className="text-sm text-red-600">{error}</p>
           </div>
         )}
+
+        <div
+          className={cn(
+            "flex-1 min-h-0 overflow-y-auto",
+            activeTab === "przeglad" ? "block" : "hidden",
+          )}
+          aria-hidden={activeTab !== "przeglad"}
+        >
+          <main className="max-w-[1440px] mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-start mb-8">
+              <div>
+                <h2 className="text-4xl font-bold font-serif mb-2">
+                  Twoje wesele
+                </h2>
+                {userEmail && (
+                  <p className="text-muted-foreground">
+                    Zalogowany jako: <strong>{userEmail}</strong>
+                  </p>
+                )}
+              </div>
+              <Button variant="outline" onClick={handleLogout}>
+                Wyloguj się
+              </Button>
+            </div>
+
+            {eventMeta && (
+              <Card className="mb-8">
+                <CardContent>
+                  <h3 className="text-sm font-medium text-neutral-900 mb-1">
+                    Twoja subdomena
+                  </h3>
+                  <p className="text-2xl font-semibold font-serif">
+                    {eventMeta.slug}.weseleo.pl
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+
+            <div>
+              <h3 className="text-3xl font-serif font-semibold mb-4">
+                Zaproszenie
+              </h3>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Card>
+                  <CardContent>
+                    <CardTitle className="text-lg mb-1 line-clamp-1">
+                      {config.couple.person1 && config.couple.person2
+                        ? `${config.couple.person1} & ${config.couple.person2}`
+                        : "Wesele"}
+                    </CardTitle>
+                    {(config.event.date || eventMeta?.event_date) && (
+                      <p className="text-sm text-gray-600 mb-2">
+                        {new Date(
+                          config.event.date || eventMeta?.event_date || "",
+                        ).toLocaleDateString("pl-PL")}
+                      </p>
+                    )}
+                    {eventMeta && (
+                      <p className="text-xs text-gray-500 mb-4">
+                        {eventMeta.slug}.weseleo.pl
+                        {eventMeta.status === "published"
+                          ? " · Opublikowane"
+                          : " · Szkic"}
+                      </p>
+                    )}
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => setTab(hasTemplate ? "sekcje" : "motyw")}
+                      >
+                        Edytuj
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        disabled
+                      >
+                        Goście
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        onClick={openPublicSite}
+                        disabled={!eventMeta?.slug}
+                      >
+                        Otwórz
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </main>
+        </div>
 
         <div
           className={cn(
