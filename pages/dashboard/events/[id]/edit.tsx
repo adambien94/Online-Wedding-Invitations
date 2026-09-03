@@ -425,7 +425,6 @@ export default function EditEventPage() {
                 </p> */}
               </div>
               <Button
-                size="lg"
                 variant="outline"
                 onClick={() => router.push("/dashboard")}
               >
@@ -860,14 +859,14 @@ export default function EditEventPage() {
               )}
             >
               {previewMode === "mobile" ? (
-                <div className="w-[390px] max-h-[790px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border-2 border-neutral-300 ">
+                <div className="w-[390px] max-h-[790px] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border-2 shadow-xl border-neutral-300 ">
                   <InvitationRenderer
                     templateKey={templateKey}
                     config={config}
                   />
                 </div>
               ) : (
-                <div className="w-9/10 max-h-[90%] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-4xl border-2 border-neutral-300 ">
+                <div className="w-9/10 max-h-[90%] flex-1 min-h-0 overflow-y-auto scrollbar-none rounded-xl border-2 shadow-xl border-neutral-300 ">
                   <InvitationRenderer
                     templateKey={templateKey}
                     config={config}

@@ -46,20 +46,12 @@ export default function NavBar() {
                 className={cn(
                   buttonVariants({
                     variant: "outline",
-                    size: "lg",
                   }),
                 )}
               >
                 Zaloguj się
               </Link>
-              <Link
-                href="/register"
-                className={cn(
-                  buttonVariants({
-                    size: "lg",
-                  }),
-                )}
-              >
+              <Link href="/register" className={cn(buttonVariants({}))}>
                 Załóż konto
               </Link>
             </div>

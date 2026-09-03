@@ -18,6 +18,15 @@ export default function TemplatePicker({
 
   return (
     <main className="max-w-[1440px] mx-auto px-4 py-8 sm:px-8">
+      <div className="pb-12 pt-4">
+        <h2 className="text-4xl font-serif leading-tight tracking-tight text-neutral-900 sm:text-4xl text-center">
+          Wybierz szablon Twojego zaproszenia
+        </h2>
+        <p className="mt-2 text-center text-neutral-900">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
         {templateRegistry.map((tmpl) => {
           const isActive = currentKey === tmpl.key;
@@ -26,11 +35,11 @@ export default function TemplatePicker({
           return (
             <div
               key={tmpl.key}
-              className={`bg-white overflow-hidden flex flex-col transition-all ${
+              className={`bg-white overflow-hidden flex flex-col transition-all shadow-xl ${
                 isActive ? "" : ""
               }`}
             >
-              <div className="aspect-4/4 px-4 pt-4 pb-2 flex items-center justify-center ">
+              <div className="aspect-4/3 flex items-center justify-center ">
                 <TemplateThumbnail tmplKey={tmpl.key} config={config} />
               </div>
 
@@ -44,7 +53,6 @@ export default function TemplatePicker({
                   {tmpl.description}
                 </p>
                 <Button
-                  size="lg"
                   disabled={isActive || isSaving}
                   className={isActive ? "hidden" : ""}
                   variant="outline"
@@ -81,7 +89,7 @@ function TemplateThumbnail({
   const Component = entry.component;
 
   return (
-    <div className="w-full h-full shadow-md relative overflow-hidden pointer-events-none select-none">
+    <div className="w-full h-full  relative overflow-hidden pointer-events-none select-none">
       <div
         className="absolute origin-top-left"
         style={{ transform: "scale(0.5)", width: "200%", height: "200%" }}

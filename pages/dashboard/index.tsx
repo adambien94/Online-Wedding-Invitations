@@ -138,7 +138,7 @@ export default function DashboardPage() {
           {reservation && (
             <Card className="mb-8">
               <CardContent>
-                <h2 className="text-sm font-medium text-gray-600 mb-1">
+                <h2 className="text-sm font-medium text-neutral-900 mb-1">
                   Twoja subdomena
                 </h2>
                 <p className="text-2xl font-semibold font-serif">
@@ -156,7 +156,7 @@ export default function DashboardPage() {
                   <h2 className="text-xl font-semibold mb-2">
                     Nie utworzyłeś jeszcze wesela
                   </h2>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-neutral-900 mb-6">
                     Zacznij od utworzenia swojego pierwszego wesela.
                   </p>
                   <Button onClick={handleCreateWedding} size="lg">
@@ -167,7 +167,7 @@ export default function DashboardPage() {
             ) : (
               <div>
                 <h2 className="text-3xl font-serif font-semibold mb-4">
-                  Twoje wesela
+                  Twoje wesele
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {events.map((event) => {
